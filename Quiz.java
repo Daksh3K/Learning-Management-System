@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Quiz {
     private String quizName;
     private String questions;
@@ -5,14 +8,16 @@ public class Quiz {
     private int numQuestions;
     private int numAnswers;
     private boolean isRandom;
+    private String teacherEmail;
 
-    public Quiz(String quizName, String questions, String answers, int numQuestions, int numAnswers, boolean isRandom) {
+    public Quiz(String quizName, String questions, String answers, int numQuestions, int numAnswers, boolean isRandom, String teacherEmail) {
         this.quizName = quizName;
         this.questions = questions;
         this.answers = answers;
         this.numQuestions = numQuestions;
         this.numAnswers = numAnswers;
         this.isRandom = isRandom;
+        this.teacherEmail = teacherEmail;
     }
 
     public String getQuizName() {
@@ -61,5 +66,31 @@ public class Quiz {
 
     public void setRandom(boolean random) {
         isRandom = random;
+    }
+
+    public String getTeacherEmail() {
+        return teacherEmail;
+    }
+
+    public String randomizeQuestions() {
+        ArrayList<String> questionList = new ArrayList<>();
+        int index = 0;
+        int counter = 0;
+        for(int x = 0; x < questions.length(); x++) {
+            if (questions.substring(x, x+2).equals("**")) {
+                questionList.add(questions.substring(index, x));
+                counter++;
+                index = x+2;
+            }
+            if (counter == numQuestions) {
+                break;
+            }
+        }
+        Collections.shuffle(questionList);
+        String newOrder = "";
+        for (int x = 0; x < numQuestions; x++) {
+            newOrder += questionList.get(x) + "**";
+        }
+        return newOrder;
     }
 }
