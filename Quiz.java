@@ -9,6 +9,8 @@ public class Quiz {
     private int numAnswers;
     private boolean isRandom;
     private String teacherEmail;
+    private String randomQuestion;
+    private String randomAnswer;
 
     public Quiz(String quizName, String questions, String answers, int numQuestions, int numAnswers, boolean isRandom, String teacherEmail) {
         this.quizName = quizName;
@@ -72,7 +74,23 @@ public class Quiz {
         return teacherEmail;
     }
 
-    public String randomize() {
+    public String getRandomQuestion() {
+        return randomQuestion;
+    }
+
+    public void setRandomQuestion(String randomQuestion) {
+        this.randomQuestion = randomQuestion;
+    }
+
+    public String getRandomAnswer() {
+        return randomAnswer;
+    }
+
+    public void setRandomAnswer(String randomAnswer) {
+        this.randomAnswer = randomAnswer;
+    }
+
+    public void randomize() {
         ArrayList<Question> questionAndAnswer = new ArrayList<>();
         ArrayList<String> questionList = new ArrayList<>();
         int indexQuestion = 0;
@@ -113,15 +131,17 @@ public class Quiz {
         for (int x = 0; x < numQuestions; x++) {
             Collections.shuffle(questionAndAnswer.get(x).getAnswerChoices());
         }
-        StringBuilder newOrder = new StringBuilder();
+        String newOrderQuestion = "";
+        String newOrderAnswer = "";
         for (int x = 0; x < numQuestions; x++) {
-            newOrder.append(questionAndAnswer.get(x).getQuestion()).append("**");
+            newOrderQuestion += questionAndAnswer.get(x).getQuestion() + "**";
         }
         for (int x = 0; x < numQuestions; x++) {
             for (int y = 0; y < questionAndAnswer.get(x).getAnswerChoices().size(); y++) {
-                newOrder.append(questionAndAnswer.get(x).getAnswerChoices().get(y)).append("**");
+                newOrderAnswer += questionAndAnswer.get(x).getAnswerChoices().get(y) + ("**");
             }
         }
-        return newOrder.toString();
+        setRandomQuestion(newOrderQuestion);
+        setRandomAnswer(newOrderAnswer);
     }
 }
