@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+//to randomize the quiz, all you have to do is call object.randomize() and then use getters to return randomized questions and corresponding answer choices
 
 public class Quiz {
     private String quizName;
