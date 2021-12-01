@@ -78,7 +78,7 @@ public class Quiz {
         int indexQuestion = 0;
         int counterQuestion = 0;
         for (int x = 0; x < questions.length(); x++) {
-            if (questions.substring(x, x + 2).equals("**")) {
+            if (questions.startsWith("**", x)) {
                 questionList.add(questions.substring(indexQuestion, x));
                 counterQuestion++;
                 indexQuestion = x + 2;
@@ -92,9 +92,9 @@ public class Quiz {
         int tempIndex = 0;
         while (numAnswersUsed != numQuestions) {
             int numAnswerChoicesUsed = 0;
+            ArrayList<String> answerList = new ArrayList<>();
             while (tempIndex + 1 < answers.length()) {
-                ArrayList<String> answerList = new ArrayList<>();
-                if (answers.substring(tempIndex, tempIndex + 2).equals("**")) {
+                if (answers.startsWith("**", tempIndex)) {
                     answerList.add(answers.substring(answerIndex, tempIndex));
                     numAnswerChoicesUsed++;
                     answerIndex = tempIndex + 2;
@@ -113,16 +113,15 @@ public class Quiz {
         for (int x = 0; x < numQuestions; x++) {
             Collections.shuffle(questionAndAnswer.get(x).getAnswerChoices());
         }
-        String newQuestions = "";
-        String newAnswers = "";
+        StringBuilder newOrder = new StringBuilder();
         for (int x = 0; x < numQuestions; x++) {
-            newQuestions += questionAndAnswer.get(x).getQuestion() + "**";
+            newOrder.append(questionAndAnswer.get(x).getQuestion()).append("**");
         }
         for (int x = 0; x < numQuestions; x++) {
             for (int y = 0; y < questionAndAnswer.get(x).getAnswerChoices().size(); y++) {
-                newAnswers += questionAndAnswer.get(x).getAnswerChoices().get(y) + "**";
+                newOrder.append(questionAndAnswer.get(x).getAnswerChoices().get(y)).append("**");
             }
         }
-        return newQuestions + newAnswers;
+        return newOrder.toString();
     }
 }
