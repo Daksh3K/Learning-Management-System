@@ -72,25 +72,57 @@ public class Quiz {
         return teacherEmail;
     }
 
-    public String randomizeQuestions() {
+    public String randomize() {
+        ArrayList<Question> questionAndAnswer = new ArrayList<>();
         ArrayList<String> questionList = new ArrayList<>();
-        int index = 0;
-        int counter = 0;
-        for(int x = 0; x < questions.length(); x++) {
-            if (questions.substring(x, x+2).equals("**")) {
-                questionList.add(questions.substring(index, x));
-                counter++;
-                index = x+2;
+        int indexQuestion = 0;
+        int counterQuestion = 0;
+        for (int x = 0; x < questions.length(); x++) {
+            if (questions.substring(x, x + 2).equals("**")) {
+                questionList.add(questions.substring(indexQuestion, x));
+                counterQuestion++;
+                indexQuestion = x + 2;
             }
-            if (counter == numQuestions) {
+            if (counterQuestion == numQuestions) {
                 break;
             }
         }
-        Collections.shuffle(questionList);
-        String newOrder = "";
-        for (int x = 0; x < numQuestions; x++) {
-            newOrder += questionList.get(x) + "**";
+        int numAnswersUsed = 0;
+        int answerIndex = 0;
+        int tempIndex = 0;
+        while (numAnswersUsed != numQuestions) {
+            int numAnswerChoicesUsed = 0;
+            while (tempIndex + 1 < answers.length()) {
+                ArrayList<String> answerList = new ArrayList<>();
+                if (answers.substring(tempIndex, tempIndex + 2).equals("**")) {
+                    answerList.add(answers.substring(answerIndex, tempIndex));
+                    numAnswerChoicesUsed++;
+                    answerIndex = tempIndex + 2;
+                }
+                tempIndex++;
+                if (numAnswerChoicesUsed == numAnswers) {
+                    questionAndAnswer.add(new Question(questionList.get(numAnswersUsed), answerList));
+                    tempIndex += 1;
+                    answerIndex = tempIndex;
+                    break;
+                }
+            }
+            numAnswersUsed++;
         }
-        return newOrder;
+        Collections.shuffle(questionAndAnswer);
+        for (int x = 0; x < numQuestions; x++) {
+            Collections.shuffle(questionAndAnswer.get(x).getAnswerChoices());
+        }
+        String newQuestions = "";
+        String newAnswers = "";
+        for (int x = 0; x < numQuestions; x++) {
+            newQuestions += questionAndAnswer.get(x).getQuestion() + "**";
+        }
+        for (int x = 0; x < numQuestions; x++) {
+            for (int y = 0; y < questionAndAnswer.get(x).getAnswerChoices().size(); y++) {
+                newAnswers += questionAndAnswer.get(x).getAnswerChoices().get(y) + "**";
+            }
+        }
+        return newQuestions + newAnswers;
     }
 }
