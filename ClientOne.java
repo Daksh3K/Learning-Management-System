@@ -15,6 +15,7 @@ public class ClientOne implements Runnable{
     static BufferedReader bfr;
     static PrintWriter writer;
     static String emailLoggedIn;
+    static Socket theSocket;
 
     /**
      * Startmenu
@@ -46,18 +47,34 @@ public class ClientOne implements Runnable{
     static JFrame quizMenu = new JFrame("Manage quizzes");
     static JTextArea listOfQuizzesInCourse = new JTextArea();
 
-    static Course courseBeingEdited;
+    static String courseBeingEdited;
 
+    /**
+     * Student JFrame and JLabel with all the courses
+     *
+     */
+    static JFrame studentMenu = new JFrame("Welcome! You are a student!");
 
+    static JFrame studentCourseMenu = new JFrame("Here are all the courses that exist");
+    static JTextArea allCoursesList =  new JTextArea();
 
+    static String courseStudentSeeing = "";
+
+    /**
+     * Student JFrame FOR THE QUIZZES
+     *
+     */
+    static JFrame studentQuizMenu = new JFrame("Here are all the quizzes");
+    static JTextArea allQuizzesForCourse = new JTextArea();
 
 
     public static void main(String[] args) {
         Thread client1 = new Thread(new ClientOne());
         client1.start();
-
         try {
-            Socket socket = new Socket("localhost", 1234);
+            Socket socket = new Socket("10.192.91.225", 1234);
+            //System.out.println(InetAddress.getLocalHost());
+            theSocket = socket;
             bfr = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
 
@@ -106,81 +123,121 @@ public class ClientOne implements Runnable{
             ActionListener createQuizListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {  //THIS IS MAKING THE QUIZ THIS IS MOST COMPLEX
+                    writer.write("makingQuiz");
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(courseBeingEdited);
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(emailLoggedIn);
+                    writer.println();
+                    writer.flush();
+
                     String quizName = JOptionPane.showInputDialog(null, "Enter quiz name", "Making a new quiz!", JOptionPane.QUESTION_MESSAGE);
-                    boolean quizAlreadyExists = false;
-                    for (Quiz q: courseBeingEdited.getQuizListInFile()) {
-                        if (quizName.equals(q.getQuizName())) {
-                            quizAlreadyExists = true;
-                            break;
-                        }
-                    }
-                    if (quizAlreadyExists) {
-                        JOptionPane.showMessageDialog(null, "You cannot have multiple quizzes with the same name.", "Cannot make quiz", JOptionPane.ERROR_MESSAGE);
-                    } else {
+                    writer.write(quizName);
+                    writer.println();
+                    writer.flush();
+
+                    String numberOfQuestions;
+                    int numQuestions = 0;
+                    while (true) {
                         try {
-                            String numberOfQuestions = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
-                            int numQuestions = Integer.parseInt(numberOfQuestions);
+                            numberOfQuestions = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                            numQuestions = Integer.parseInt(numberOfQuestions);
+
                             if (numQuestions < 1) {
                                 JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
-                            } else {  //asking for number of answer choices for questinos
-                                try {
-                                    int numAnswerChoices = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter number of answer choices per question", "Number of answer choices", JOptionPane.QUESTION_MESSAGE));
-                                    if (numAnswerChoices < 1) {
-                                        JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time", "Error with number of answers", JOptionPane.ERROR_MESSAGE);
-                                    } else {  //for loop runs
-                                        String questionString = "";
-                                        String answerString = "";
-                                        for (int i = 1; i <= numQuestions; i++) {
-                                            while (true) {
-                                                String question = JOptionPane.showInputDialog(null, "Enter the question for Question " + i + "\n***NOTE: YOU CANNOT HAVE '*' IN THE QUESTION", "Enter question", JOptionPane.QUESTION_MESSAGE);
-                                                if (question == null) {
-                                                    JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your question.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
-                                                } else if (question.length() == 0) {
-                                                    JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter a question please", JOptionPane.ERROR_MESSAGE);
-                                                } else if (question.indexOf("*") != -1) {
-                                                    JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your question.", "No '*' in question", JOptionPane.ERROR_MESSAGE);
-                                                } else {
-                                                    questionString += (question + "**");  //question successfully made and break from while loop to get answer choices;
-                                                    break;
-                                                }
-                                            }
-                                            for (int j = 1; j <= numAnswerChoices; j++) {
-                                                while (true) {
-                                                    String answerChoice = JOptionPane.showInputDialog(null, "Enter answer choice " + j + "\n***NOTE: YOU CANNOT HAVE '*' IN ANSWER CHOICE", "Enter answer choice", JOptionPane.QUESTION_MESSAGE);
-                                                    if (answerChoice == null) {
-                                                        JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your answer choice.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
-                                                    } else if (answerChoice.length() == 0) {
-                                                        JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter something please", JOptionPane.ERROR_MESSAGE);
-                                                    } else if (answerChoice.indexOf("*") != -1) {
-                                                        JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your answer choice.", "No '*' in answer choice", JOptionPane.ERROR_MESSAGE);
-                                                    } else {
-                                                        answerString += (answerChoice + "**");  //answerChoices made
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //tell server quiz is made
-                                        while (true) {
-                                            int randomOrNot = JOptionPane.showConfirmDialog(null, "Do you want the quiz to be randomized", "Should quiz be randomized?", JOptionPane.YES_NO_OPTION);
-                                            if (randomOrNot != JOptionPane.YES_OPTION && randomOrNot != JOptionPane.NO_OPTION) {
-                                                JOptionPane.showMessageDialog(null, "You must select yes or no.", "Select yes or no", JOptionPane.ERROR_MESSAGE);
-                                            } else {
-                                                if (randomOrNot == JOptionPane.NO_OPTION) {  //if user DOESNT WANT Random
+                            } else {
+                                break;
+                            }
+                        } catch (Exception numConvError) {
+                            JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    //WE HAVE NUM QUESTIONS
+                    String numAnswers;
+                    int numAns = 0;
+                    while (true) {
+                        try {
+                            numAnswers = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                            numAns = Integer.parseInt(numAnswers);
 
-                                                } else {  //if user wants random
+                            if (numAns < 1) {
+                                JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                break;
+                            }
+                        } catch (Exception numConvError) {
+                            JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    //we have num answers
 
-                                                }
-                                                break;
-                                            }
-                                        }
-                                    }
-                                } catch (Exception error) {
-                                    JOptionPane.showMessageDialog(null, "Make sure to enter a valid number and make sure it's 1 or greater next time!");
+                    String questionString = "";
+                    String answerString = "";
+
+                    for (int i = 1; i <= numQuestions; i++) {
+                        while (true) {
+                            String question = JOptionPane.showInputDialog(null, "Enter the question for Question " + i + "\n***NOTE: YOU CANNOT HAVE '*' IN THE QUESTION", "Enter question", JOptionPane.QUESTION_MESSAGE);
+                            if (question == null) {
+                                JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your question.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
+                            } else if (question.length() == 0) {
+                                JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter a question please", JOptionPane.ERROR_MESSAGE);
+                            } else if (question.indexOf("*") != -1) {
+                                JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your question.", "No '*' in question", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                questionString += (question + "**");  //question successfully made and break from while loop to get answer choices;
+                                break;
+                            }
+                        }
+                        for (int j = 1; j <= numAns; j++) {
+                            while (true) {
+                                String answerChoice = JOptionPane.showInputDialog(null, "Enter answer choice " + j + "\n***NOTE: YOU CANNOT HAVE '*' IN ANSWER CHOICE", "Enter answer choice", JOptionPane.QUESTION_MESSAGE);
+                                if (answerChoice == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your answer choice.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
+                                } else if (answerChoice.length() == 0) {
+                                    JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter something please", JOptionPane.ERROR_MESSAGE);
+                                } else if (answerChoice.indexOf("*") != -1) {
+                                    JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your answer choice.", "No '*' in answer choice", JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    answerString += (answerChoice + "**");  //answerChoices made
+                                    break;
                                 }
                             }
-                        } catch (Exception error) {
-                            JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    writer.write(questionString);
+                    writer.println();
+                    writer.flush();
+                    writer.write(answerString);
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(numberOfQuestions);
+                    writer.println();
+                    writer.flush();
+                    writer.write(numAnswers);
+                    writer.println();
+                    writer.flush();
+
+                    //tell server quiz is made
+                    while (true) {
+                        int randomOrNot = JOptionPane.showConfirmDialog(null, "Do you want the quiz to be randomized", "Should quiz be randomized?", JOptionPane.YES_NO_OPTION);
+                        if (randomOrNot != JOptionPane.YES_OPTION && randomOrNot != JOptionPane.NO_OPTION) {
+                            JOptionPane.showMessageDialog(null, "You must select yes or no.", "Select yes or no", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            if (randomOrNot == JOptionPane.NO_OPTION) {  //if user DOESNT WANT Random
+                                writer.write("noRandomize");
+                                writer.println();
+                                writer.flush();
+                            } else {  //if user wants random
+                                writer.write("randomize");
+                                writer.println();
+                                writer.flush();
+                            }
+                            break;
                         }
                     }
                 }
@@ -191,6 +248,120 @@ public class ClientOne implements Runnable{
             ActionListener editQuizListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    writer.write("editingQuiz");
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(courseBeingEdited);
+                    writer.println();
+                    writer.flush();
+
+                    String quizName = JOptionPane.showInputDialog(null, "Enter quiz name", "Making a new quiz!", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(quizName);
+                    writer.println();
+                    writer.flush();
+
+                    String numberOfQuestions;
+                    int numQuestions = 0;
+                    while (true) {
+                        try {
+                            numberOfQuestions = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                            numQuestions = Integer.parseInt(numberOfQuestions);
+
+                            if (numQuestions < 1) {
+                                JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                break;
+                            }
+                        } catch (Exception numConvError) {
+                            JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    //WE HAVE NUM QUESTIONS
+                    String numAnswers;
+                    int numAns = 0;
+                    while (true) {
+                        try {
+                            numAnswers = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                            numAns = Integer.parseInt(numAnswers);
+
+                            if (numAns < 1) {
+                                JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                break;
+                            }
+                        } catch (Exception numConvError) {
+                            JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    //we have num answers
+
+                    String questionString = "";
+                    String answerString = "";
+
+                    for (int i = 1; i <= numQuestions; i++) {
+                        while (true) {
+                            String question = JOptionPane.showInputDialog(null, "Enter the question for Question " + i + "\n***NOTE: YOU CANNOT HAVE '*' IN THE QUESTION", "Enter question", JOptionPane.QUESTION_MESSAGE);
+                            if (question == null) {
+                                JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your question.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
+                            } else if (question.length() == 0) {
+                                JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter a question please", JOptionPane.ERROR_MESSAGE);
+                            } else if (question.indexOf("*") != -1) {
+                                JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your question.", "No '*' in question", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                questionString += (question + "**");  //question successfully made and break from while loop to get answer choices;
+                                break;
+                            }
+                        }
+                        for (int j = 1; j <= numAns; j++) {
+                            while (true) {
+                                String answerChoice = JOptionPane.showInputDialog(null, "Enter answer choice " + j + "\n***NOTE: YOU CANNOT HAVE '*' IN ANSWER CHOICE", "Enter answer choice", JOptionPane.QUESTION_MESSAGE);
+                                if (answerChoice == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish making this quiz. Please type your answer choice.", "Must finish making quiz", JOptionPane.ERROR_MESSAGE);
+                                } else if (answerChoice.length() == 0) {
+                                    JOptionPane.showMessageDialog(null, "You didn't enter any characters. Try again", "Enter something please", JOptionPane.ERROR_MESSAGE);
+                                } else if (answerChoice.indexOf("*") != -1) {
+                                    JOptionPane.showMessageDialog(null, "You can't have '*' anywhere in your answer choice.", "No '*' in answer choice", JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    answerString += (answerChoice + "**");  //answerChoices made
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    writer.write(questionString);
+                    writer.println();
+                    writer.flush();
+                    writer.write(answerString);
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(numberOfQuestions);
+                    writer.println();
+                    writer.flush();
+                    writer.write(numAnswers);
+                    writer.println();
+                    writer.flush();
+
+                    //tell server quiz is made
+                    while (true) {
+                        int randomOrNot = JOptionPane.showConfirmDialog(null, "Do you want the quiz to be randomized", "Should quiz be randomized?", JOptionPane.YES_NO_OPTION);
+                        if (randomOrNot != JOptionPane.YES_OPTION && randomOrNot != JOptionPane.NO_OPTION) {
+                            JOptionPane.showMessageDialog(null, "You must select yes or no.", "Select yes or no", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            if (randomOrNot == JOptionPane.NO_OPTION) {  //if user DOESNT WANT Random
+                                writer.write("noRandomize");
+                                writer.println();
+                                writer.flush();
+                            } else {  //if user wants random
+                                writer.write("randomize");
+                                writer.println();
+                                writer.flush();
+                            }
+                            break;
+                        }
+                    }
+
 
                 }
             };
@@ -200,7 +371,17 @@ public class ClientOne implements Runnable{
             ActionListener deleteQuizListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    writer.write("deleteQuiz");
+                    writer.println();
+                    writer.flush();
+                    writer.write(courseBeingEdited);
+                    writer.println();
+                    writer.flush();
 
+                    String quizToDelete = JOptionPane.showInputDialog(null, "Enter name of quiz you want to delete", "name of quiz you want to delete", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(quizToDelete);
+                    writer.println();
+                    writer.flush();
                 }
             };
             deleteQuiz.addActionListener(deleteQuizListener);
@@ -240,33 +421,18 @@ public class ClientOne implements Runnable{
             ActionListener createCourseListener = new ActionListener() {  //CREATING COURSE
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    while (true) {
-                        String courseName = JOptionPane.showInputDialog(null, "Enter course name", "Making a new course!", JOptionPane.QUESTION_MESSAGE);
-                        boolean courseExists = false;
-                        for(Course c: LmsMain.getCoursesInFile()) {
-                            if (c.getCourseName().equals(courseName)) {
-                                courseExists = true;
-                                break;
-                            }
-                        }
-                        if (courseExists) {
-                            JOptionPane.showMessageDialog(null, "The name of your course is already being used! Please select another name", "Error with making course", JOptionPane.ERROR_MESSAGE);
-                        } else {  //making course
-                            writer.write("makingCourse");
-                            writer.println();
-                            writer.flush();
+                    writer.write("makeCourse");
+                    writer.println();
+                    writer.flush();
 
-                            writer.write(courseName);
-                            writer.println();
-                            writer.flush();
+                    writer.write(emailLoggedIn);
+                    writer.println();
+                    writer.flush();
 
-                            writer.write(emailLoggedIn);
-                            writer.println();
-                            writer.flush();
-
-                            break;
-                        }
-                    }
+                    String courseName = JOptionPane.showInputDialog(null, "Enter course name", "Making a new course!", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(courseName);
+                    writer.println();
+                    writer.flush();
                 }
             };
             createCourse.addActionListener(createCourseListener);
@@ -275,62 +441,34 @@ public class ClientOne implements Runnable{
             ActionListener editCourseListener = new ActionListener() {  //EDITING COURSE
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    while (true) {
-                        String courseToEdit = JOptionPane.showInputDialog(null, "Type course you want to edit", "Editing Course", JOptionPane.QUESTION_MESSAGE);
-                        boolean courseFound = false;
-                        for (Course c : LmsMain.getCoursesInFile()) {
-                            if (c.getCourseName().equals(courseToEdit)) {   //if course is foundm use "c"
-                                courseFound = true;
-                                courseBeingEdited = c;
-                                String listOfQuizzes = "";
-                                for (Quiz q : c.getQuizListInFile()) {
-                                    listOfQuizzes += (q.getQuizName() + "\n");
-                                }
-                                if (listOfQuizzes.equals("")) {
-                                    listOfQuizzes = "There are no quizzes made for this course";
-                                }
-                                listOfQuizzesInCourse.setText(listOfQuizzes);
-                                coursesMenu.setVisible(false);  //hide courses menu
-                                quizMenu.setVisible(true);   //show quizzes menu
-                                break;
-                            }
-                        }
-                        if (!courseFound) {  //course matches
-                            JOptionPane.showMessageDialog(null, "We can't find the course you entered", "Can't find course", JOptionPane.ERROR_MESSAGE);
-                            continue;
-                        }
-                        break;
-                    }
+                    writer.write("editCourse");
+                    writer.println();
+                    writer.flush();
+                    String courseToEdit = JOptionPane.showInputDialog(null, "Type course you want to edit", "Editing Course", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(courseToEdit);
+                    writer.println();
+                    writer.flush();
+                    courseBeingEdited = courseToEdit; // courseName
                 }
             };
             editCourse.addActionListener(editCourseListener);
 
             JButton deleteCourse = new JButton("Delete Course");
+
             ActionListener delCourseListener = new ActionListener() {   //Deleting course
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    while (true) {
-                        String courseToDelete = JOptionPane.showInputDialog(null, "Enter the name of the course you want to delete", "Deleting course", JOptionPane.QUESTION_MESSAGE);
-                        boolean foundCourse = false;
-                        for (Course c: LmsMain.getCoursesInFile()) {
-                            if (c.getCourseName().equals(courseToDelete)) {
-                                foundCourse = true;
-                                break;
-                            }
-                        }
-                        if (foundCourse) {
-                            writer.write("deleteCourse");
-                            writer.println();
-                            writer.flush();
+                    writer.write("deleteCourse");
+                    writer.println();
+                    writer.flush();
+                    String courseToDelete = JOptionPane.showInputDialog(null, "Enter the name of the course you want to delete", "Deleting course", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(courseToDelete);
+                    writer.println();
+                    writer.flush();
 
-                            writer.write(courseToDelete);
-                            writer.println();
-                            writer.flush();
-                            break;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Couldn't find the course you entered.", "Couldn't delete course", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
+                    writer.write(emailLoggedIn);
+                    writer.println();
+                    writer.flush();
                 }
             };
             deleteCourse.addActionListener(delCourseListener);
@@ -367,22 +505,12 @@ public class ClientOne implements Runnable{
             ActionListener manageCourseButton = new ActionListener() {   //button that teacher clicks to see courses
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    teacherMenu.setVisible(false);
-                    coursesMenu.setVisible(true);
-
-                    /**
-                     * Setting coursesList Text
-                     */
-                    String courseList = "";
-                    for(Course c: LmsMain.getCoursesInFile()) {
-                        if (c.getTeacherWhoMadeCourse().equals(emailLoggedIn)) {
-                            courseList += (c.getCourseName() + "\n");
-                        }
-                    }
-                    if (courseList.equals("")) {
-                        courseList = "No Courses Made Yet";
-                    }
-                    listOfCourses.setText(courseList);
+                    writer.write("manageCourse");
+                    writer.println();
+                    writer.flush();
+                    writer.write(emailLoggedIn);
+                    writer.println();
+                    writer.flush();
                 }
             };
             manageButton.addActionListener(manageCourseButton);
@@ -439,23 +567,226 @@ public class ClientOne implements Runnable{
                     writer.write("logout");
                     writer.println();
                     writer.flush();
-                    teacherMenu.setVisible(false);  //"teacher account is exited/logged out"
+                    teacherMenu.setVisible(false);
+                    studentMenu.setVisible(false);
                     startMenu.setVisible(true);
                 }
             };
             logoutButton.addActionListener(logoutListener);
 
-
-
-
-
-
-
-
-
-
             tMenuContent.add(tMainJpanel, BorderLayout.CENTER);
             teacherMenu.setVisible(false);
+
+
+            /**
+             * Student stuff =======================================================================
+             */
+
+            /**
+             * Student sees quizzes for course they are seeing
+             */
+            Container studentQuizContent = studentQuizMenu.getContentPane();
+            studentQuizContent.setLayout(new BorderLayout());
+            studentQuizMenu.setSize(400, 400);
+            studentQuizMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            studentQuizMenu.setVisible(false);
+            allQuizzesForCourse.setEditable(false);
+
+
+            JPanel stuQuizJpanel = new JPanel();
+            stuQuizJpanel.add(allQuizzesForCourse, BorderLayout.NORTH);
+
+            JPanel stuQuizButtonJpanel = new JPanel();
+
+            JButton takeQuizButton = new JButton("Take Quiz");
+            stuQuizButtonJpanel.add(takeQuizButton, BorderLayout.SOUTH);
+            ActionListener takeQuizListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            };
+            takeQuizButton.addActionListener(takeQuizListener);
+
+            studentQuizContent.add(stuQuizJpanel, BorderLayout.NORTH);
+            studentQuizContent.add(stuQuizButtonJpanel, BorderLayout.SOUTH);
+
+            /**
+             * Student sees all courses
+             */
+            Container studentCourseContent = studentCourseMenu.getContentPane();
+            studentCourseContent.setLayout(new BorderLayout());
+            studentCourseMenu.setSize(400, 400);
+            studentCourseMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            studentCourseMenu.setVisible(false);
+            allCoursesList.setEditable(false);
+
+
+            JPanel studentCourseJpanel = new JPanel();
+            studentCourseJpanel.add(allCoursesList, BorderLayout.NORTH);
+            JPanel studentCourseJPanelForButton = new JPanel();
+
+            JButton stuViewCourse = new JButton("View Course's quizzes");
+            studentCourseJPanelForButton.add(stuViewCourse, BorderLayout.SOUTH);
+            ActionListener stuViewCourseListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    writer.write("studentViewCourse");
+                    writer.println();
+                    writer.flush();
+
+                    String course = JOptionPane.showInputDialog(null, "Enter course you want to access", "Enter course name", JOptionPane.QUESTION_MESSAGE);
+                    writer.write(course);
+                    writer.println();
+                    writer.flush();
+                    courseStudentSeeing = course;
+                }
+            };
+            stuViewCourse.addActionListener(stuViewCourseListener);
+
+
+            studentCourseContent.add(studentCourseJpanel, BorderLayout.NORTH);
+            studentCourseContent.add(studentCourseJPanelForButton, BorderLayout.SOUTH);
+            /**
+             * student main menu
+             */
+            Container studentContent = studentMenu.getContentPane();
+            studentContent.setLayout(new BorderLayout());
+            studentMenu.setSize(400, 400);
+            studentMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  //change to DoNothingonclose and force teacher to press logout to leave
+            studentMenu.setVisible(false);
+
+            JPanel sMainJpanel = new JPanel();
+            JLabel sMainMessage = new JLabel("Welcome Student! Press a button to start");
+
+            sMainJpanel.add(sMainMessage, BorderLayout.NORTH);
+
+            JButton studentViewCourse = new JButton("View Courses To Take Quizzes");
+            ActionListener studentCoursesListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    writer.write("displayAllCourses");
+                    writer.println();
+                    writer.flush();
+                    studentCourseMenu.setVisible(true);
+                    studentMenu.setVisible(false);
+                }
+            };
+            studentViewCourse.addActionListener(studentCoursesListener);
+            sMainJpanel.add(studentViewCourse, BorderLayout.SOUTH);
+
+            JButton viewGradesButton = new JButton("See your grades");
+            ActionListener viewGradeListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            };
+            viewGradesButton.addActionListener(viewGradeListener);
+            sMainJpanel.add(viewGradesButton, BorderLayout.SOUTH);
+
+            JButton studentEdit = new JButton("Edit Name");
+            sMainJpanel.add(studentEdit, BorderLayout.SOUTH);
+
+            ActionListener stuNameListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String newName = JOptionPane.showInputDialog(null, "Enter new name", "Name change", JOptionPane.QUESTION_MESSAGE);
+                    writer.write("changeName");
+                    writer.println();
+                    writer.flush();
+
+                    writer.write(newName);
+                    writer.println();
+                    writer.flush();
+                }
+            };
+            studentEdit.addActionListener(stuNameListener);
+
+            JButton studentDeleteButton = new JButton("Delete account");
+            sMainJpanel.add(studentDeleteButton, BorderLayout.SOUTH);
+            ActionListener stuDelAccListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    writer.write("deleteAccount");
+                    writer.println();
+                    writer.flush();
+                    teacherMenu.setVisible(false);
+                    studentMenu.setVisible(false); //"teacher account is exited"
+                    startMenu.setVisible(true);
+                }
+            };
+            studentDeleteButton.addActionListener(stuDelAccListener);
+
+            JButton studentLogoutButton = new JButton("Logout");
+            sMainJpanel.add(studentLogoutButton, BorderLayout.SOUTH);
+
+            ActionListener stuLogoutListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    writer.write("logout");
+                    writer.println();
+                    writer.flush();
+                    teacherMenu.setVisible(false);
+                    studentMenu.setVisible(false);
+                    startMenu.setVisible(true);
+                }
+            };
+            studentLogoutButton.addActionListener(stuLogoutListener);
+            studentContent.add(sMainJpanel, BorderLayout.CENTER);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             /**
              * WHAT HAPPENS GUI WISE WHEN USER CREATES ACCOUNT
@@ -464,39 +795,26 @@ public class ClientOne implements Runnable{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() == createAccBut) {
-                        String name = JOptionPane.showInputDialog(null, "Enter name", "Enter name", JOptionPane.QUESTION_MESSAGE);
-                        String email = "";
-                        boolean emailExists = false;
-                        while (true) {
-                            email = JOptionPane.showInputDialog(null, "Enter email", "Enter email", JOptionPane.QUESTION_MESSAGE);
-                            for (People p: getPeopleListInFile()) {
-                                if (p.getEmail().equals(email)) {
-                                    emailExists = true;
-                                    break;
-                                }
-                            }
-                            if (emailExists) {
-                                JOptionPane.showMessageDialog(null, "Email already used", "Email already used", JOptionPane.ERROR_MESSAGE);
-                                emailExists = false;
-                            } else {
-                                break;
-                            }
-                        }
-                        int role = JOptionPane.showConfirmDialog(null, "Are you a student or teacher\nPress 'Yes' if student, 'No' if teacher", "Student or Teacher?", JOptionPane.YES_NO_OPTION);
-                        String stuOrTeach = Integer.toString(role);
                         writer.write("createAccount");
                         writer.println();
                         writer.flush();
+
+                        String name = JOptionPane.showInputDialog(null, "Enter name", "Enter name", JOptionPane.QUESTION_MESSAGE);
                         writer.write(name);
                         writer.println();
                         writer.flush();
+                        String email = "";
+                        email = JOptionPane.showInputDialog(null, "Enter email", "Enter email", JOptionPane.QUESTION_MESSAGE);
                         writer.write(email);
                         writer.println();
                         writer.flush();
-                        writer.write(stuOrTeach);
-                        writer.println();
-                        writer.flush();
-                        System.out.println("Account made");
+
+
+
+
+
+
+
                     }
                 }
             };
@@ -508,48 +826,39 @@ public class ClientOne implements Runnable{
             ActionListener loginListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    writer.write("loginAccount");
+                    writer.println();
+                    writer.flush();
                     String enteredEmail = JOptionPane.showInputDialog(null, "Enter your email to login", "Login", JOptionPane.QUESTION_MESSAGE);
-                    boolean foundAccount = false;
-                    for(People p: getPeopleListInFile()) {
-                        if (p.getEmail().equals(enteredEmail)) {
-                            foundAccount = true;
-                            break;
-                        }
-                    }
-                    if (foundAccount) {  //At this point user logged in
-                        writer.write("loginAccount");
-                        writer.println();
-                        writer.flush();
-
-                        writer.write(enteredEmail);
-                        writer.println();
-                        writer.flush();
-
-                        /**
-                         * Starting from this point, user is logged in.
-                         */
-                        startMenu.setVisible(false);
-
-                        for (People p: getPeopleListInFile()) {
-                            if (p.getEmail().equals(enteredEmail)) {
-                                if (p instanceof Student) {  //student logged in
-                                    Student user = (Student) p;
-                                    emailLoggedIn = user.getEmail();
-
-                                } else {    //teacher logged in
-                                    Teacher user = (Teacher) p;
-                                    emailLoggedIn = user.getEmail();
-                                    teacherMenu.setVisible(true);
-
-                                }
-                            }
-                        }
-
-
-
-                    } else if (enteredEmail != null){
-                        JOptionPane.showMessageDialog(null, "Invalid Account Credentials", "Invalid Email", JOptionPane.ERROR_MESSAGE);
-                    }
+                    writer.write(enteredEmail);
+                    writer.println();
+                    writer.flush();
+                    emailLoggedIn = enteredEmail;
+//                        /**
+//                         * Starting from this point, user is logged in.
+//                         */
+//                        startMenu.setVisible(false);
+//
+//                        for (People p: getPeopleListInFile()) {
+//                            if (p.getEmail().equals(enteredEmail)) {
+//                                if (p instanceof Student) {  //student logged in
+//                                    Student user = (Student) p;
+//                                    emailLoggedIn = user.getEmail();
+//
+//                                } else {    //teacher logged in
+//                                    Teacher user = (Teacher) p;
+//                                    emailLoggedIn = user.getEmail();
+//                                    teacherMenu.setVisible(true);
+//
+//                                }
+//                            }
+//                        }
+//
+//
+//
+//                    } else if (enteredEmail != null){
+//                        JOptionPane.showMessageDialog(null, "Invalid Account Credentials", "Invalid Email", JOptionPane.ERROR_MESSAGE);
+//                    }
                 }
             };
             loginBut.addActionListener(loginListener);
@@ -571,62 +880,170 @@ public class ClientOne implements Runnable{
                     continue;
                 }
                 System.out.println(mesFromSer);
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("State.txt"))) {
-                    Object readStateObj = ois.readObject();
-                    State theCurrentState = (State) readStateObj;
-                    String stringDisplay = theCurrentState.getStudentsString();
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            /**
-                             * Setting list of courses that teacher sees
-                             */
-                            String courseList = "";
-                            for(Course c: LmsMain.getCoursesInFile()) {
-                                if (c.getTeacherWhoMadeCourse().equals(emailLoggedIn)) {
-                                    courseList += (c.getCourseName() + "\n");
-                                }
-                            }
-                            if (courseList.equals("")) {
-                                courseList = "No Courses Made Yet";
-                            }
-                            listOfCourses.setText(courseList);
+                if (mesFromSer.equals("yes")) {
+                    System.out.println("OKAY CREATING ACCOUNT");
+                    int role = JOptionPane.showConfirmDialog(null, "Are you a student or teacher\nPress 'Yes' if student, 'No' if teacher", "Student or Teacher?", JOptionPane.YES_NO_OPTION);
+                    String stuOrTeach = Integer.toString(role);
 
-                            /**
-                             * Setting list of quizzes teacher sees for specific course
-                             */
-                            String quizList = "";
-                            if (courseBeingEdited != null) {
-                                System.out.println("here made it");
-                                for (Quiz q : courseBeingEdited.getQuizListInFile()) {
-                                    quizList += (q.getQuizName() + "\n");
-                                }
-                                if (quizList.equals("")) {
-                                    quizList = "No Quizzes Made Yet";
-                                }
-                                listOfQuizzesInCourse.setText(quizList);
-                            }
+                    writer.write(stuOrTeach);
+                    writer.println();
+                    writer.flush();
+                    System.out.println("Account made");
+                    continue;
+                } else if (mesFromSer.equals("no")) {
+                    JOptionPane.showMessageDialog(null, "Cant make acc", "no", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                } else if (mesFromSer.equals("accNotFound")) {
+                    JOptionPane.showMessageDialog(null, "Cant find ur account", "No account", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                } else if (mesFromSer.equals("loggedIn")) {
+                    String role = bfr.readLine();
+                    startMenu.setVisible(false);
+                    if (role.equals("teacher")) {
+                        teacherMenu.setVisible(true);
+                    } else {  //if student logged in
+                        studentMenu.setVisible(true);
+                    }
+                } else if (mesFromSer.equals("manageCourse")) {
+                    String listCourse = bfr.readLine();
+                    teacherMenu.setVisible(false);
+                    coursesMenu.setVisible(true);
+                    String finalListCourses = "";
+                    int whereDivider = listCourse.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListCourses += (listCourse.substring(0, whereDivider) + "\n");
+                        listCourse = listCourse.substring(whereDivider + 2);
+                        whereDivider = listCourse.indexOf("**");
+                    }
+                    System.out.println(finalListCourses);
+                    listOfCourses.setText(finalListCourses);
+                } else if (mesFromSer.equals("cantMakeCourse")) {
+                    JOptionPane.showMessageDialog(null, "Can't make course", " ", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("makeCourse")) {   //updates teacher courses as well student list of courses
+                    String newListOfCourses = bfr.readLine();
+                    String finalListCourses = "";
+                    int whereDivider = newListOfCourses.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListCourses += (newListOfCourses.substring(0, whereDivider) + "\n");
+                        newListOfCourses = newListOfCourses.substring(whereDivider + 2);
+                        whereDivider = newListOfCourses.indexOf("**");
+                    }
+                    System.out.println(finalListCourses);
+                    listOfCourses.setText(finalListCourses);
+                } else if (mesFromSer.equals("cantDeleteCourse")) {
+                    JOptionPane.showMessageDialog(null, "Couldn't find the course you entered.", "Couldn't delete course", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("deleteCourse")) {
+                    String listCourse = bfr.readLine();
+                    String finalListCourses = "";
+                    int whereDivider = listCourse.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListCourses += (listCourse.substring(0, whereDivider) + "\n");
+                        listCourse = listCourse.substring(whereDivider + 2);
+                        whereDivider = listCourse.indexOf("**");
+                    }
+                    listOfCourses.setText(finalListCourses);
+                } else if (mesFromSer.equals("cantEditCourse")) {
+                    JOptionPane.showMessageDialog(null, "Can't find the course", "Can't find course", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("editCourse")) {
+                    coursesMenu.setVisible(false);  //hide courses menu
+                    quizMenu.setVisible(true);
+
+                    String listQuiz = bfr.readLine();
+                    String finalListQuiz = "";
+                    int whereDivider = listQuiz.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListQuiz += (listQuiz.substring(0, whereDivider) + "\n");
+                        listQuiz = listQuiz.substring(whereDivider + 2);
+                        whereDivider = listQuiz.indexOf("**");
+                    }
+                    listOfQuizzesInCourse.setText(finalListQuiz);
+                } else if (mesFromSer.equals("cantMakeQuiz")) {
+                    JOptionPane.showMessageDialog(null, "You cannot have multiple quizzes with the same name.", "Cannot make quiz", JOptionPane.ERROR_MESSAGE);
+
+                } else if (mesFromSer.equals("makeQuiz")) {
+                    String listQuiz = bfr.readLine();
+                    String finalListQuiz = "";
+                    int whereDivider = listQuiz.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListQuiz += (listQuiz.substring(0, whereDivider) + "\n");
+                        listQuiz = listQuiz.substring(whereDivider + 2);
+                        whereDivider = listQuiz.indexOf("**");
+                    }
+                    listOfQuizzesInCourse.setText(finalListQuiz);
+                } else if (mesFromSer.equals("cantDeleteQuiz")) {
+                    JOptionPane.showMessageDialog(null, "Couldn't find the quiz", "Can't find quiz", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("deleteQuiz")) {
+                    String listQuiz = bfr.readLine();
+                    String finalListQuiz = "";
+                    int whereDivider = listQuiz.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListQuiz += (listQuiz.substring(0, whereDivider) + "\n");
+                        listQuiz = listQuiz.substring(whereDivider + 2);
+                        whereDivider = listQuiz.indexOf("**");
+                    }
+                    listOfQuizzesInCourse.setText(finalListQuiz);
+                } else if (mesFromSer.equals("cantEditQuiz")) {
+                    JOptionPane.showMessageDialog(null, "Can't Find your quiz", "Can't find your quiz", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("editQuiz")) {
+                    JOptionPane.showMessageDialog(null, "Successfully editted quiz", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                } else if (mesFromSer.equals("showStudentCourses")) {
+                    String allCourses = bfr.readLine();
+                    String finalListCourses = "";
+                    int whereDivider = allCourses.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListCourses += (allCourses.substring(0, whereDivider) + "\n");
+                        allCourses = allCourses.substring(whereDivider + 2);
+                        whereDivider = allCourses.indexOf("**");
+                    }
+                    allCoursesList.setText(finalListCourses);
+                } else if (mesFromSer.equals("cantFindCourse")) {
+                    JOptionPane.showMessageDialog(null, "Can't find the course you entered", "Can't find course", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("foundCourse")) {
+                    studentCourseMenu.setVisible(false);
+                    studentQuizMenu.setVisible(true);
+
+                } else if (mesFromSer.equals("editStudentCourseList")) {
+                    String allCourses = bfr.readLine();
+                    String finalListCourses = "";
+                    int whereDivider = allCourses.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListCourses += (allCourses.substring(0, whereDivider) + "\n");
+                        allCourses = allCourses.substring(whereDivider + 2);
+                        whereDivider = allCourses.indexOf("**");
+                    }
+                    allCoursesList.setText(finalListCourses);
+                } else if (mesFromSer.equals("updateStudentQuizList")) {
+                    String listQuiz = bfr.readLine();
+                    String finalListQuiz = "";
+                    int whereDivider = listQuiz.indexOf("**");
+                    while (whereDivider != -1) {
+                        finalListQuiz += (listQuiz.substring(0, whereDivider) + "\n");
+                        listQuiz = listQuiz.substring(whereDivider + 2);
+                        whereDivider = listQuiz.indexOf("**");
+                    }
+                    allQuizzesForCourse.setText(finalListQuiz);
+                } else if (mesFromSer.equals("cantTakeQuiz")) {
+                    JOptionPane.showMessageDialog(null, "Can't find quiz", "Can't find the quiz", JOptionPane.ERROR_MESSAGE);
+                } else if (mesFromSer.equals("takeQuiz")) {
+
+                } else if (mesFromSer.equals("updateStudentQuizListWhenCourseEdited")) {
+                    String courseJustEditted = bfr.readLine();
+                    String listQuiz = bfr.readLine();
+                    if (courseJustEditted.equals(courseStudentSeeing)) {
+                        String finalListQuiz = "";
+                        int whereDivider = listQuiz.indexOf("**");
+                        while (whereDivider != -1) {
+                            finalListQuiz += (listQuiz.substring(0, whereDivider) + "\n");
+                            listQuiz = listQuiz.substring(whereDivider + 2);
+                            whereDivider = listQuiz.indexOf("**");
                         }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        allQuizzesForCourse.setText(finalListQuiz);
+                    }
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
-    public static ArrayList<People> getPeopleListInFile() {
-        try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream("People.txt"))) {
-            Object o = oos.readObject();
-            if (o == null) {
-                return null;
-            }
-            ArrayList<People> thePeople = (ArrayList<People>) o;
-            return thePeople;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }
+
