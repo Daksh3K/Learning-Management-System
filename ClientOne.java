@@ -80,13 +80,13 @@ public class ClientOne implements Runnable {
      */
     static JFrame studentSubmissionMenu = new JFrame("Here are all your submissions");
     static JTextArea listOfSubmissions = new JTextArea();
-    
+
     public static void main(String[] args) {
         Thread client1 = new Thread(new ClientOne());
         client1.start();
         try {
             Socket socket = new Socket("localhost", 1234);
-            //System.out.println(InetAddress.getLocalHost());
+            System.out.println(InetAddress.getLocalHost());
             theSocket = socket;
             bfr = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
@@ -1195,8 +1195,10 @@ public class ClientOne implements Runnable {
                      */
                     Date theDateOfSubmission = new Date();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    String theDate = dateFormat.format(theDateOfSubmission);
-                    String quizSheet = finalQuestions + "**" + studentAnswers + "**Submission Date & Time: " + theDate;
+                    String theDate = dateFormat.format(theDateOfSubmission) + "**";
+                    String quizSheet = finalQuestions  + studentAnswers + "Submission Date & Time: " + theDate;
+
+                    System.out.println(quizSheet);
 
                     System.out.println(quizSheet);
                     if (ans == JOptionPane.NO_OPTION) {
@@ -1295,7 +1297,7 @@ public class ClientOne implements Runnable {
                         }
                     }
                     String percentScore = String.format("%.2f", (double) numCorrect / numQuestions * 100);
-                    finalScoreString += ("Your score: " + numCorrect + "/" + numQuestions + ", or " + percentScore + "%" + "**");
+                    finalScoreString += ("Your score: " + numCorrect + "/" + numQuestions + ", or " + percentScore + "%");
                     writer.write(finalScoreString);
                     writer.println();
                     writer.flush();
