@@ -12,12 +12,12 @@ import java.util.*;
 import java.awt.*;
 import java.text.*;
 
-public class ClientOne implements Runnable{
+public class ClientOne implements Runnable {
     static BufferedReader bfr;
     static PrintWriter writer;
-    static String emailLoggedIn;
+    //static String emailLoggedIn;
     static Socket theSocket;
-
+    static String emailLoggedIn;
     /**
      * Startmenu
      */
@@ -80,9 +80,7 @@ public class ClientOne implements Runnable{
      */
     static JFrame studentSubmissionMenu = new JFrame("Here are all your submissions");
     static JTextArea listOfSubmissions = new JTextArea();
-
-    //10.192.91.225 dorm number
-    //10.186.72.124 hicks number
+    
     public static void main(String[] args) {
         Thread client1 = new Thread(new ClientOne());
         client1.start();
@@ -989,7 +987,7 @@ public class ClientOne implements Runnable{
     public void run() {
         while (true) {
             //have the code here read the People file to display output Strings for teacher list and student list
-
+            System.out.println("LISTENING TO SERVER");
             try {
                 String mesFromSer;
                 try {
