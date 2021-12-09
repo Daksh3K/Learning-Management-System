@@ -81,7 +81,8 @@ public class ClientOne implements Runnable{
     static JFrame studentSubmissionMenu = new JFrame("Here are all your submissions");
     static JTextArea listOfSubmissions = new JTextArea();
 
-    //10.192.91.225
+    //10.192.91.225 dorm number
+    //10.186.72.124 hicks number
     public static void main(String[] args) {
         Thread client1 = new Thread(new ClientOne());
         client1.start();
