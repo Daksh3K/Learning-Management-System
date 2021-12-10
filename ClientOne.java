@@ -84,7 +84,7 @@ public class ClientOne implements Runnable {
         client1.start();
         try {
             Socket socket = new Socket("localhost", 1234);
-            System.out.println(InetAddress.getLocalHost());
+            //System.out.println(InetAddress.getLocalHost());
             theSocket = socket;
             bfr = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
@@ -985,7 +985,7 @@ public class ClientOne implements Runnable {
     public void run() {
         while (true) {
             //have the code here read the People file to display output Strings for teacher list and student list
-            System.out.println("LISTENING TO SERVER");
+            //System.out.println("LISTENING TO SERVER");
             try {
                 String mesFromSer;
                 try {
@@ -993,16 +993,16 @@ public class ClientOne implements Runnable {
                 } catch (Exception e) {
                     continue;
                 }
-                System.out.println(mesFromSer);
+                //System.out.println(mesFromSer);
                 if (mesFromSer.equals("yes")) {
-                    System.out.println("OKAY CREATING ACCOUNT");
+                    //System.out.println("OKAY CREATING ACCOUNT");
                     int role = JOptionPane.showConfirmDialog(null, "Are you a student or teacher\nPress 'Yes' if student, 'No' if teacher", "Student or Teacher?", JOptionPane.YES_NO_OPTION);
                     if (role == JOptionPane.YES_OPTION || role == JOptionPane.NO_OPTION) {
                         String stuOrTeach = Integer.toString(role);
                         writer.write(stuOrTeach);
                         writer.println();
                         writer.flush();
-                        System.out.println("Account made");
+                        //System.out.println("Account made");
                     }
                 } else if (mesFromSer.equals("no")) {
                     JOptionPane.showMessageDialog(null, "It seems like the email you entered is already used.\nChoose another email", "Email already used/Can't make account", JOptionPane.ERROR_MESSAGE);
@@ -1033,7 +1033,7 @@ public class ClientOne implements Runnable {
                         listCourse = listCourse.substring(whereDivider + 2);
                         whereDivider = listCourse.indexOf("**");
                     }
-                    System.out.println(finalListCourses);
+                    //System.out.println(finalListCourses);
                     listOfCourses.setText(finalListCourses);
                 } else if (mesFromSer.equals("cantMakeCourse")) {
                     JOptionPane.showMessageDialog(null, "The course name you selected is either being used by you or another teacher.\nPlease use a different course name next time", "Can't make course", JOptionPane.ERROR_MESSAGE);
@@ -1046,7 +1046,7 @@ public class ClientOne implements Runnable {
                         newListOfCourses = newListOfCourses.substring(whereDivider + 2);
                         whereDivider = newListOfCourses.indexOf("**");
                     }
-                    System.out.println(finalListCourses);
+                    //System.out.println(finalListCourses);
                     listOfCourses.setText(finalListCourses);
                 } else if (mesFromSer.equals("cantDeleteCourse")) {
                     JOptionPane.showMessageDialog(null, "Couldn't find the course you entered.", "Couldn't delete course", JOptionPane.ERROR_MESSAGE);
@@ -1146,7 +1146,7 @@ public class ClientOne implements Runnable {
                     studentQuizMenu.setVisible(false);
                     String questions = bfr.readLine();
                     String answers = bfr.readLine();
-                    System.out.println(answers);
+                    //System.out.println(answers);
                     int numQuestions = Integer.parseInt(bfr.readLine());
                     int numAns = Integer.parseInt(bfr.readLine());
 
@@ -1196,9 +1196,9 @@ public class ClientOne implements Runnable {
                     String theDate = dateFormat.format(theDateOfSubmission) + "**";
                     String quizSheet = finalQuestions  + studentAnswers + "Submission Date & Time: " + theDate;
 
-                    System.out.println(quizSheet);
+                    //System.out.println(quizSheet);
 
-                    System.out.println(quizSheet);
+                    //System.out.println(quizSheet);
                     if (ans == JOptionPane.NO_OPTION) {
                         writer.write("dontSubmit");
                         writer.println();
