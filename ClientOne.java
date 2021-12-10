@@ -5,9 +5,7 @@ import java.awt.event.WindowEvent;
 import java.lang.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.net.*;
-import java.nio.channels.spi.AbstractInterruptibleChannel;
 import java.util.*;
 import java.awt.*;
 import java.text.*;
@@ -1007,10 +1005,10 @@ public class ClientOne implements Runnable {
                         System.out.println("Account made");
                     }
                 } else if (mesFromSer.equals("no")) {
-                    JOptionPane.showMessageDialog(null, "Cant make acc", "no", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "It seems like the email you entered is already used.\nChoose another email", "Email already used/Can't make account", JOptionPane.ERROR_MESSAGE);
                     continue;
                 } else if (mesFromSer.equals("accNotFound")) {
-                    JOptionPane.showMessageDialog(null, "Cant find ur account", "No account", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid login credential", "Your account wasn't found", JOptionPane.ERROR_MESSAGE);
                     continue;
                 } else if (mesFromSer.equals("loggedIn")) {
                     String role = bfr.readLine();
@@ -1038,7 +1036,7 @@ public class ClientOne implements Runnable {
                     System.out.println(finalListCourses);
                     listOfCourses.setText(finalListCourses);
                 } else if (mesFromSer.equals("cantMakeCourse")) {
-                    JOptionPane.showMessageDialog(null, "Can't make course", " ", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "The course name you selected is either being used by you or another teacher.\nPlease use a different course name next time", "Can't make course", JOptionPane.ERROR_MESSAGE);
                 } else if (mesFromSer.equals("makeCourse")) {   //updates teacher courses as well student list of courses
                     String newListOfCourses = bfr.readLine();
                     String finalListCourses = "";
@@ -1105,7 +1103,7 @@ public class ClientOne implements Runnable {
                 } else if (mesFromSer.equals("cantEditQuiz")) {
                     JOptionPane.showMessageDialog(null, "Can't Find your quiz", "Can't find your quiz", JOptionPane.ERROR_MESSAGE);
                 } else if (mesFromSer.equals("editQuiz")) {
-                    JOptionPane.showMessageDialog(null, "Successfully editted quiz", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Successfully edited quiz", "Success!", JOptionPane.INFORMATION_MESSAGE);
                 } else if (mesFromSer.equals("showStudentCourses")) {
                     String allCourses = bfr.readLine();
                     String finalListCourses = "";
@@ -1297,7 +1295,7 @@ public class ClientOne implements Runnable {
                         }
                     }
                     String percentScore = String.format("%.2f", (double) numCorrect / numQuestions * 100);
-                    finalScoreString += ("Your score: " + numCorrect + "/" + numQuestions + ", or " + percentScore + "%");
+                    finalScoreString += ("Your score: " + numCorrect + "/" + numQuestions + ", or " + percentScore + "%**");
                     writer.write(finalScoreString);
                     writer.println();
                     writer.flush();
@@ -1310,9 +1308,6 @@ public class ClientOne implements Runnable {
                         int whereDivider = newSubListForStu.indexOf("**");
                         while (whereDivider != -1) {
                             finalList += (newSubListForStu.substring(0, whereDivider) + "\n");
-                            newSubListForStu = newSubListForStu.substring(whereDivider + 2);
-                            whereDivider = newSubListForStu.indexOf("**");
-                            finalList += (newSubListForStu.substring(0, whereDivider) + "\n\n");
                             newSubListForStu = newSubListForStu.substring(whereDivider + 2);
                             whereDivider = newSubListForStu.indexOf("**");
                         }
