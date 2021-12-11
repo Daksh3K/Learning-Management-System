@@ -17,6 +17,11 @@ import java.util.*;
  */
 public class Student extends People implements Serializable {
 
+    /**
+     * Constructor for Student object
+     * @param name name of the student
+     * @param email email of the student
+     */
     public Student(String name, String email) {
         super(name, email);
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(super.getTextFileName()))) {
@@ -29,7 +34,7 @@ public class Student extends People implements Serializable {
 
     /**
      * Method returns the arrayList of all submission in student's txt file
-     * @return
+     * @return ArrayList of all submission objects of that student
      */
     public ArrayList<Submission> getSubmissionListInFile() {
         try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(super.getTextFileName()))) {
@@ -46,7 +51,7 @@ public class Student extends People implements Serializable {
 
     /**
      * Method puts the new submission arrayList into student's txt file and saves it
-     * @param newArrayList
+     * @param newArrayList the updated ArrayList of Submission objects to be written into the student's file
      */
     public void updateSubmissionListInFile(ArrayList<Submission> newArrayList) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(super.getTextFileName()))) {
