@@ -86,11 +86,11 @@ Test Result: Success
 ## Test 3: Logging into TEACHER account
 After finishing Test 2, we should see the “Start Menu” JFrame. 
 
-Step 1: On the “Start Menu” Jframe, there should be a “Login” button. Press the “Login” button. We should see this prompt: 
+-Step 1: On the “Start Menu” Jframe, there should be a “Login” button. Press the “Login” button. We should see this prompt: 
 
 ![loginPrompt](https://user-images.githubusercontent.com/89658307/145689141-390d2d9b-9287-41cd-a6e5-c12cd14db4ee.PNG)
 
-Step 2: enter “teacherEmail” in the text field and press the “OK” button to login. You should see the teacher menu JFrame:
+-Step 2: enter “teacherEmail” in the text field and press the “OK” button to login. You should see the teacher menu JFrame:
 
 ![teacherMenu](https://user-images.githubusercontent.com/89658307/145689147-c4a7b965-6335-4a76-b61d-ed28a7773935.PNG)
 
@@ -102,37 +102,37 @@ Result: success
 
 Once we finish Test 3, you should see the teacher menu option that has the welcome message as well as buttons regarding what the teacher account can do. Let’s manage courses.
 
-Step 1: On the teacher menu JFrame, press the “Manage Course/Quiz” button. You should be redirect to this JFrame:
+-Step 1: On the teacher menu JFrame, press the “Manage Course/Quiz” button. You should be redirect to this JFrame:
 
 ![noCoursesCourseMenu](https://user-images.githubusercontent.com/89658307/145689168-e43465e8-d633-4376-876c-fd638f158a27.PNG)
 
 We should see nothing besides the buttons because no courses have been made yet.
 Before we create a course, let’s press “edit course”.
 
-Step 2: Press the “Edit Course” button to show this JOptionPane:
+-Step 2: Press the “Edit Course” button to show this JOptionPane:
 
 ![editingCourse](https://user-images.githubusercontent.com/89658307/145689181-bc111b20-3433-43cc-942b-43d79700ffaa.PNG)
 
-Step 3: Enter a String (any String) or no String, and press the “OK” button. You should see this error message:
+-Step 3: Enter a String (any String) or no String, and press the “OK” button. You should see this error message:
 
 ![cantFindCourse](https://user-images.githubusercontent.com/89658307/145689190-6ff8e191-ac7f-4abb-a44e-4808e5d0c7c0.PNG)
 
 This is expected, since no matter what String we put, it won’t indicate any course the teacher made because the teacher has made no course.
 
-Step 4: Press the “OK” button on the JOptionPane error message and then press the “Delete Course” button. You should see this prompt:
+-Step 4: Press the “OK” button on the JOptionPane error message and then press the “Delete Course” button. You should see this prompt:
 
 ![deleteCourses](https://user-images.githubusercontent.com/89658307/145689201-65f5803a-e016-42ed-907b-85d43859541f.PNG)
 
-Step 5: In the text field, enter any String, or no String, and press the “OK” button. We should receive this error message since there are no courses to delete as of right now.
+-Step 5: In the text field, enter any String, or no String, and press the “OK” button. We should receive this error message since there are no courses to delete as of right now.
 
 ![cantDeleteCourse](https://user-images.githubusercontent.com/89658307/145689207-9d03586e-f5dd-430f-9b2c-e7c0df5743fd.PNG)
 
-Step 6: Press the “OK” button to display only the “Your Created Courses” JFrame.
-Step 7: Press the “Create Course” button and you should see this prompt:
+-Step 6: Press the “OK” button to display only the “Your Created Courses” JFrame.
+-Step 7: Press the “Create Course” button and you should see this prompt:
 
 ![makingNewCourse](https://user-images.githubusercontent.com/89658307/145689212-38e8d3be-cc67-4531-9fdd-3d0e467ac08e.PNG)
 
-Step 8: In the text field, enter “Course1” and press the “OK” button. As soon as you press the “OK” button, you should see that the “Your Created Courses” window looks like this:
+-Step 8: In the text field, enter “Course1” and press the “OK” button. As soon as you press the “OK” button, you should see that the “Your Created Courses” window looks like this:
 
 ![updatedCoursesMenu](https://user-images.githubusercontent.com/89658307/145689227-dfa7b59c-adc2-442e-825d-2149ff9b8723.PNG)
 
