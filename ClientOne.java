@@ -267,8 +267,12 @@ public class ClientOne implements Runnable {
                         while (true) {
                             try {
                                 numberOfQuestions = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                if (numberOfQuestions == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish making the quiz", "Must make quiz", JOptionPane.ERROR_MESSAGE);
+                                    continue;
+                                }
+                                System.out.println(numberOfQuestions);
                                 numQuestions = Integer.parseInt(numberOfQuestions);
-
                                 if (numQuestions < 1) {
                                     JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
                                 } else {
@@ -283,9 +287,12 @@ public class ClientOne implements Runnable {
                         int numAns = 0;
                         while (true) {
                             try {
-                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of answer choices for each question for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                if (numAnswers == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish making the quiz", "Must make quiz", JOptionPane.ERROR_MESSAGE);
+                                    continue;
+                                }
                                 numAns = Integer.parseInt(numAnswers);
-
                                 if (numAns < 1) {
                                     JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
                                 } else {
@@ -371,7 +378,9 @@ public class ClientOne implements Runnable {
             ActionListener editQuizListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String quizName = JOptionPane.showInputDialog(null, "Enter quiz name", "Making a new quiz!", JOptionPane.QUESTION_MESSAGE);
+                    String quizName = JOptionPane.showInputDialog(null, "Enter quiz name" +
+                            "\n**Note: If you enter in an invalid quiz name,\nyou will still be prompted to enter\n the new information regarding the quiz, but\n after" +
+                            "you put in all the info, you will receive an error message, and no changes will be made.", "Editing a quiz!", JOptionPane.QUESTION_MESSAGE);
                     if (quizName != null) {
                         writer.write("editingQuiz");
                         writer.println();
@@ -390,6 +399,10 @@ public class ClientOne implements Runnable {
                         while (true) {
                             try {
                                 numberOfQuestions = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                if (numberOfQuestions == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish editing the quiz", "Must edit quiz", JOptionPane.ERROR_MESSAGE);
+                                    continue;
+                                }
                                 numQuestions = Integer.parseInt(numberOfQuestions);
 
                                 if (numQuestions < 1) {
@@ -407,6 +420,10 @@ public class ClientOne implements Runnable {
                         while (true) {
                             try {
                                 numAnswers = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                if (numAnswers == null) {
+                                    JOptionPane.showMessageDialog(null, "You must finish editing the quiz", "Must edit quiz", JOptionPane.ERROR_MESSAGE);
+                                    continue;
+                                }
                                 numAns = Integer.parseInt(numAnswers);
 
                                 if (numAns < 1) {
@@ -712,8 +729,6 @@ public class ClientOne implements Runnable {
                     writer.println();
                     writer.flush();
 
-                    teacherMenu.setVisible(false);  //"teacher account is exited"
-                    startMenu.setVisible(true);
                 }
             };
             deleteButton.addActionListener(deleteAccListener);
@@ -1049,7 +1064,10 @@ public class ClientOne implements Runnable {
                     //System.out.println(finalListCourses);
                     listOfCourses.setText(finalListCourses);
                 } else if (mesFromSer.equals("cantDeleteCourse")) {
-                    JOptionPane.showMessageDialog(null, "Couldn't find the course you entered.", "Couldn't delete course", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "We couldn't delete your course for either of these 2 reasons:" +
+                            "\n1) The course name you entered can't be found" +
+                            "\n2) You have quizzes within the course you are trying to delete." +
+                            "\nIn order to delete a course, make sure there are 0 quizzes for that course.", "Couldn't delete course", JOptionPane.ERROR_MESSAGE);
                 } else if (mesFromSer.equals("deleteCourse")) {
                     String listCourse = bfr.readLine();
                     String finalListCourses = "";
@@ -1101,7 +1119,8 @@ public class ClientOne implements Runnable {
                     }
                     listOfQuizzesInCourse.setText(finalListQuiz);
                 } else if (mesFromSer.equals("cantEditQuiz")) {
-                    JOptionPane.showMessageDialog(null, "Can't Find your quiz", "Can't find your quiz", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Can't find your quiz with the name you entered, so" +
+                            "\n no changes have been made", "Can't find your quiz", JOptionPane.ERROR_MESSAGE);
                 } else if (mesFromSer.equals("editQuiz")) {
                     JOptionPane.showMessageDialog(null, "Successfully edited quiz", "Success!", JOptionPane.INFORMATION_MESSAGE);
                 } else if (mesFromSer.equals("showStudentCourses")) {
@@ -1337,6 +1356,16 @@ public class ClientOne implements Runnable {
 
                 } else if (mesFromSer.equals("stop")) {
                     break;
+                } else if (mesFromSer.equals("attemptedDeletion")) {
+                    String result = bfr.readLine();
+                    if (result.equals("cantDeleteAccount")) {
+                        JOptionPane.showMessageDialog(null, "In order to delete your account," +
+                                "\nyou must delete all courses you have made first", "Can't delete account", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Account has been deleted", "Account deleted", JOptionPane.INFORMATION_MESSAGE);
+                        teacherMenu.setVisible(false);  //"teacher account is exited"
+                        startMenu.setVisible(true);
+                    }
                 }
 
 
