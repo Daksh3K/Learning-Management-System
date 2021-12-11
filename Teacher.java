@@ -18,8 +18,8 @@ public class Teacher extends People implements Serializable {
      * Constructor For Teacher
      * Teacher's email and name are saved
      * Teacher's text file is made
-     * @param name
-     * @param email
+     * @param name name of the teacher
+     * @param email email of the teacher
      */
     public Teacher(String name, String email) {
         super(name, email);
