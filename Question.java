@@ -7,9 +7,8 @@ import java.util.ArrayList;
  * and a String arraylist with the answer choices.
  *
  * @author Cole Priser
- * @version November 15 2021
+ * @version December 11 2021
  */
-
 public class Question {
     private ArrayList<String> answerChoices;
     private String question;
@@ -20,7 +19,6 @@ public class Question {
      * @param question      string that contains the question
      * @param answerChoices possible answers to the corresponding question string
      */
-
     public Question(String question, ArrayList<String> answerChoices) {
         this.answerChoices = answerChoices;
         this.question = question;
@@ -31,7 +29,6 @@ public class Question {
      *
      * @return String
      */
-
     public String getQuestion() {
         return question;
     }
@@ -41,7 +38,6 @@ public class Question {
      *
      * @return ArrayList<String>
      */
-
     public ArrayList<String> getAnswerChoices() {
         return answerChoices;
     }
