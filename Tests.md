@@ -1,6 +1,9 @@
 # TEST CASES
 Please read everything in this document very carefully.
 
+We will mention often in our test cases to enter something, such as a number or a String. Omit the quotation marks when inputting and make sure to enter
+the inputs exactly as shown/mentioned.
+
 ## IMPORTANT NOTES BEFORE STARTING TEST CASES. YOU NEED TO READ THIS!
 Before beginning the test cases, please make sure that all of the Classes (.java files) that were initially submitted in Vocareum exist.
 
