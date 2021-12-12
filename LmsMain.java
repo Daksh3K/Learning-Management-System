@@ -118,4 +118,31 @@ public class LmsMain {
         }
     }
 
+
+
+    public static ArrayList<Submission> getSubmissionListInFile(String studentSubmissionFileName) {
+        try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(studentSubmissionFileName))) {
+            Object o = oos.readObject();
+            if (o == null) {
+                return null;
+            }
+            ArrayList<Submission> theSubs = (ArrayList<Submission>) o;
+            return theSubs;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Method puts the new submission arrayList into student's txt file and saves it
+     * @param newArrayList
+     */
+    public static void updateSubmissionListInFile(ArrayList<Submission> newArrayList, String studentSubmissionFileName) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(studentSubmissionFileName))) {
+            oos.writeObject(newArrayList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
