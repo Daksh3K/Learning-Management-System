@@ -194,4 +194,112 @@ For the 3rd question, make the 3rd answer choice this: “CS 24000”
 
 Notice how as soon as the quiz is finished being made, there are real time updates displaying the new quiz we just made in the quizzes menu JFrame. 
 
-## Test 6: Log in as student
+## Test 6: Logging out of a teacher account
+Step 1: Starting from the “Manage Quizzes” JFrame which is where we ended Test 5, click the “X” at the top right corner of the JFrame. You should see the “Your created courses” JFrame.
+Step 2: On the top right corner of “Your created courses” JFrame, click the “X’. You should see the teacher menu JFrame.
+Step 3: In order to logout, either click the “Logout” button or the “X” at the top right corner of the teacher menu JFrame. You should see the start menu screen that has the “Create Account” button and “Login” button. You’ve successfully logged out of your account.
+
+Expected result: Starting from the quiz JFrame, a teacher was able to logout of their account
+## Test 7: Log in as student
+Step 1: using the student account we made earlier, let’s login to our student account. Click the “Login” button on the “Start Menu” JFrame, enter “studentEmail” (this was the email we used earlier to create the student account) in the text field, and press the “OK” button. You should see this student menu after logging in:
+
+![studentMenu](https://user-images.githubusercontent.com/89658307/145702979-90cd6438-e6d5-4975-8df8-8e84f344d05a.PNG)
+
+## Test 8: Taking a quiz
+Step 1: From the student menu, press the “View Courses To Take Quizzes” Button. You will see this on your screen afterward:
+
+![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145704656-9c4574de-30c7-4fa8-8ffd-0ba1fe56d94d.PNG)
+
+Step 2: Press the “View Course’s quizzes” button and you’ll see this JOptionPane:
+
+![studentEnteringCourse](https://user-images.githubusercontent.com/89658307/145704662-f1742d13-e859-4eb0-8121-ec80a72e4ffc.PNG)
+
+Step 3: Enter “Course1” in the text box and press the “OK” button. You will see this JFrame now:
+
+![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145704674-679b572b-22c5-4ddf-82e1-351ac5b83748.PNG)
+
+Step 4: Press the “Take Quiz” button to see this JOptionPane:
+
+![enterQuizToTake](https://user-images.githubusercontent.com/89658307/145704684-cda818e5-1f75-42d6-9433-2839d240ee86.PNG)
+
+Step 5: In the text box, enter “Quiz1” in the text field and press the “OK” button to take the quiz and see a JOptionPane that should be SIMILAR (MAY OR MAY NOT BE EXACT SAME) afterward:
+
+![studentTakingQuiz](https://user-images.githubusercontent.com/89658307/145704690-3f1611a7-1230-4c45-82e1-9be8b8ac9eae.PNG)
+
+**Important note: Remember, when we were the teacher and we made this quiz, we chose to randomize the quiz. Therefore, the order of questions (and answer choices) you may receive might be different from the order we are going to use for this test. Even though when we (the test developers) ran this program and got the first question to be “Question 1: What’s this class?”, you might have gotten something different, which is perfectly fine. At this point, use the drop down menu to see the answer choices for each question, click an answer choice (it doesn’t matter which answer choice), and then press “OK” to move onto the next question. Since this quiz we are taking has 3 questions, you select an answer for each question and then at the end, you will see this JOptionPane after you answer all questions:
+
+![submitQuizQuestino](https://user-images.githubusercontent.com/89658307/145704698-6d32588f-1c60-44ac-9896-e9f35bc33d32.PNG)
+
+Step 6: We want to submit our test, so click the “YES” button and you should see a confirmation JOptionPane like this (the submission time and date will be different for you, and that’s expected):
+
+![submitConfirm](https://user-images.githubusercontent.com/89658307/145704716-3c85f4ca-b309-43ef-806b-268f3dcdd135.PNG)
+
+Step 7: Press the “OK” button and you should see this JFrame reappear:
+
+![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145704723-3e63cbcc-3025-4c7f-b4f1-104857820a72.PNG)
+
+Expected Result: the student chooses the course, the quiz, takes the quiz, and successfully submits their quiz.
+
+## Test 9: Making sure Data Is Saved Even if User doesn’t log out or program crashes/shuts down through teacher logging in and grading the quiz taken.
+We left off at the student submitting their quiz and seeing the list of quizzes that exist (The JFrame shown in Step 7 of Test 8).
+Step 1: Stop the server side and client side code (LmsMain.java and ClientOne.java). After you do this, there should be no JOptionPanes or JFrames showing. 
+Step 2: Rerun the server side code (LmsMain.java) and client side code (ClientOne.java). You should see the Start Menu JFrame.
+Step 3: Press the “Login” button and login to the TEACHER account by entering “teacherEmail” in the text field and pressing the “OK” button. You should see the teacher menu JFrame afterward:
+
+![teacherMenu](https://user-images.githubusercontent.com/89658307/145704754-dce43c93-008d-4854-9593-10ee977efe3b.PNG)
+
+Step 4: Now, press the “Grade Quizzes” button. You will see this window now:
+
+![submissionToGradeMenu](https://user-images.githubusercontent.com/89658307/145704769-afba000b-577b-4bb2-a5b3-7bfcf2e040f6.PNG)
+
+We see that the data regarding the student’s quiz submission is stored, and even if the server crashes, all data is saved. 
+Step 5: Press the “Grade a quiz” button to get an JOptionPane that asks “Enter quiz to grade”.
+Step 6: In that JOptionPane that asks “Enter quiz to grade”, enter “Quiz1” and you should see something SIMILAR (DOESN’T HAVE TO BE THE SAME AS THIS) to this JOptionPane:
+
+![quizSheetGrading](https://user-images.githubusercontent.com/89658307/145704779-4a18c486-0326-40ed-a175-56e85f6a5e3b.PNG)
+
+**Important note: While your JOptionPane probably won’t look like this (since the quiz was randomized), it should look similar to this. There should be 3 questions, followed by the 3 answer choices the student selected, and the time stamp. One important thing to note is that the order in which the student saw the questions is the order in which the questions should be listed in the JOptionPane above
+Step 7: NO MATTER WHAT QUESTION OR ANSWER CHOICE IS WRITTEN ON YOUR JOPTIONPANE FOR THE QUESTION AND ANSWER, JUST PRESS the “YES” Button regardless. 
+Step 8: After you finished Step 7, you will see a JOptionPane again to decide whether you will give a point for the 2nd question. NO MATTER WHAT THE QUESTION AND ANSWER IS, JUST PRESS THE “NO” BUTTON REGARDLESS. 
+Step 9: After step 8, you’ll be prompted with one more JOptionPane to decide whether  to give a point for the 3rd question. NO MATTER WHAT THE QUESTION AND ANSWER IS, JUST PRESS THE “YES” BUTTON REGARDLESS”. Once you press “Yes”, there should be no JOptionPanes, and you should observe that the JFrame automatically updates since the “Quiz1” that was on the JFrame before disappears. The quiz has been graded now, and the student can see their response. Before we do that in our next test, press the “X” button at the top right of the JFrame to go to the teacher menu, and then press the “Logout” button or the “X” at the top right of the JFrame to go back to the Start Menu.
+
+Expected Result: teacher successfully logs in after the server shuts down and sees the student’s quiz submission. The teacher grades the student’s quiz.
+
+## Test 10: Seeing the grade the teacher gave
+Step 1: Press the “Login” button and enter “studentEmail” in the text field. Press the “OK” button to login and see the student menu JFrame. You should see this now:
+
+![studentMenu](https://user-images.githubusercontent.com/89658307/145704793-e17a09ff-5ac6-4226-8c8c-cd962722a923.PNG)
+
+Step 2: Click the “See your grades” button and you will see this JFrame that looks SIMILAR (DOESN’T HAVE TO BE EXACT SAME):
+
+![studentSeesGrade](https://user-images.githubusercontent.com/89658307/145704798-2e8f6dec-ee41-4d64-adb6-6c2c02b9e9ab.PNG)
+
+While the top part of the text area can be different from what you see above, the text starting below the submission time and date (in the example above, the submission time and date is referring to the line that says “12/12/2021 02:12:52”) should be the same. 
+
+Expected result: student logs in and sees the teacher’s grade
+
+## Test 11: Editing a user’s account
+Step 1: From the JFrame in Step 2 of Test 10, press the “X” on the top right of the JFrame and you will return to the student menu.
+Step 2: There will be a button that says “Edit name”. Click that button to see this:
+
+![editName](https://user-images.githubusercontent.com/89658307/145704817-f58ecd39-9c5f-4a13-a674-383a17fdda2d.PNG)
+
+Step 3: In the text box, enter “NewStudent” and press the “OK” button to see this now:
+
+![stuMenAfterEdit](https://user-images.githubusercontent.com/89658307/145704833-81e70df2-89f9-4aa0-b986-fa8a632f69e9.PNG)
+
+Notice how the name change is automatically reflected in the Welcome message in real time. 
+
+Expected Result: student changes their name successfully and sees their name change reflected in real time.
+
+##Test 12: Deleting an account
+Step 1: From the student menu where we left off in Step 3 of Test 11, press the “Delete account” button, where you’ll be redirected to the start menu JFrame and a JOptionPane will also show up saying “Account has been deleted”. 
+Step 2: Press “OK” on the JOptionPane and then press “Login”. 
+Step 3: Enter “studentEmail” in the text box and press “OK”. You will see this JOptionPane:
+
+![invalidAcc](https://user-images.githubusercontent.com/89658307/145704851-f18c0d67-f776-4f01-86d2-7db925f7be50.PNG)
+
+This is expected since we just deleted our student account.
+
+Expected result: student deletes their account. When trying to login using the account the student used to make the account that was just deleted, an error message pops up for the user.
+
