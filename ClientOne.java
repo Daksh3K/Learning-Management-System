@@ -287,19 +287,19 @@ public class ClientOne implements Runnable {
                         int numAns = 0;
                         while (true) {
                             try {
-                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of answer choices for each question for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of answer choices for each question for the quiz", "Number of answer choices per question", JOptionPane.QUESTION_MESSAGE);
                                 if (numAnswers == null) {
                                     JOptionPane.showMessageDialog(null, "You must finish making the quiz", "Must make quiz", JOptionPane.ERROR_MESSAGE);
                                     continue;
                                 }
                                 numAns = Integer.parseInt(numAnswers);
                                 if (numAns < 1) {
-                                    JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of answers", JOptionPane.ERROR_MESSAGE);
                                 } else {
                                     break;
                                 }
                             } catch (Exception numConvError) {
-                                JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of answers", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                         //we have num answers
@@ -419,7 +419,7 @@ public class ClientOne implements Runnable {
                         int numAns = 0;
                         while (true) {
                             try {
-                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of questions for the quiz", "Number of questions", JOptionPane.QUESTION_MESSAGE);
+                                numAnswers = JOptionPane.showInputDialog(null, "Enter the number of answer choices for each question", "Number of answer choices per question", JOptionPane.QUESTION_MESSAGE);
                                 if (numAnswers == null) {
                                     JOptionPane.showMessageDialog(null, "You must finish editing the quiz", "Must edit quiz", JOptionPane.ERROR_MESSAGE);
                                     continue;
@@ -427,12 +427,12 @@ public class ClientOne implements Runnable {
                                 numAns = Integer.parseInt(numAnswers);
 
                                 if (numAns < 1) {
-                                    JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Make sure to enter a number equal to or greater than 1 next time!", "Error with number of answers", JOptionPane.ERROR_MESSAGE);
                                 } else {
                                     break;
                                 }
                             } catch (Exception numConvError) {
-                                JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of questions", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Make sure to enter a valid number and make sure it's 1 or greater next time!", "Error with number of answers", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                         //we have num answers
