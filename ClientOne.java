@@ -84,7 +84,7 @@ public class ClientOne implements Runnable {
         client1.start();
         try {
             Socket socket = new Socket("localhost", 1234);
-            //System.out.println(InetAddress.getLocalHost());
+            System.out.println(InetAddress.getLocalHost());
             theSocket = socket;
             bfr = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
@@ -378,9 +378,9 @@ public class ClientOne implements Runnable {
             ActionListener editQuizListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String quizName = JOptionPane.showInputDialog(null, "Enter quiz name" +
-                            "\n**Note: If you enter in an invalid quiz name,\nyou will still be prompted to enter\n the new information regarding the quiz, but\n after" +
-                            "you put in all the info, you will receive an error message, and no changes will be made.", "Editing a quiz!", JOptionPane.QUESTION_MESSAGE);
+                    String quizName = JOptionPane.showInputDialog(null, "Enter the name of the quiz that you want to change" +
+                            "\n**Note: If you enter in an invalid quiz name,\nyou will still be prompted to enter\nthe new information regarding the quiz, but\nafter" +
+                            "you put in all the info, you will receive an\nerror message, and no changes will be made.", "Editing a quiz!", JOptionPane.QUESTION_MESSAGE);
                     if (quizName != null) {
                         writer.write("editingQuiz");
                         writer.println();
@@ -1173,8 +1173,8 @@ public class ClientOne implements Runnable {
                     String studentAnswers = "";
                     for (int i = 1; i <= numQuestions; i++) {
                         int whereDivider = questions.indexOf("**");
-                        String currentQuestion = ("Question " + i + ": " + questions.substring(0, whereDivider) + "**");
-                        finalQuestions += currentQuestion;
+                        String currentQuestion = ("Question " + i + ": " + questions.substring(0, whereDivider));
+                        finalQuestions += (currentQuestion + "**");
                         questions = questions.substring(whereDivider + 2);
                         //Questions list is asked
                         String[] answerSet = new String[numAns];
@@ -1215,7 +1215,7 @@ public class ClientOne implements Runnable {
                     String theDate = dateFormat.format(theDateOfSubmission) + "**";
                     String quizSheet = finalQuestions  + studentAnswers + "Submission Date & Time: " + theDate;
 
-                    //System.out.println(quizSheet);
+                    System.out.println(quizSheet);
 
                     //System.out.println(quizSheet);
                     if (ans == JOptionPane.NO_OPTION) {
