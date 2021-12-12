@@ -84,7 +84,7 @@ public class ClientOne implements Runnable {
         client1.start();
         try {
             Socket socket = new Socket("localhost", 1234);
-            System.out.println(InetAddress.getLocalHost());
+            //System.out.println(InetAddress.getLocalHost());
             theSocket = socket;
             bfr = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
