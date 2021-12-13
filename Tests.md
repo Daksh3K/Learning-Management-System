@@ -212,18 +212,29 @@ We just made a quiz, but let’s edit the quiz. You should still be seeing the J
 ![answerChoiceFor1stQuestion](https://user-images.githubusercontent.com/89658307/145787359-b551b996-52e8-4197-adda-07f4d324192b.PNG)
 
 -Step 6: In the text field, enter “1” and press the “OK” button. You will see the above JOptionPane again but it will ask you to enter answer choice 2.
+
 -Step 7: In the text field, enter “2” and press the “OK” button. You will see the JOptionPane again asking for answer choice 3. 
+
 -Step 8: In the text field, enter “3” and press the “OK” button.
--Step 9: Now, you have made the first question and the 3 answer choices for the question. Since we indicated that we wanted to have 3 questions in total with 3 answer choices for each question, you will see JOptionPanes again that will ask you for the 2nd question, and then you’ll be prompted to enter 3 answer choices for that question. Afterward, you’ll be asked again to enter the 3rd question, and then you’ll be prompted to enter 3 answer choices for that question. Read below to see what to enter when making the rest of the quiz.
+
+-Step 9: Now, you have made the first question and the 3 answer choices for the question. Since we indicated that we wanted to have 3 questions in total with 3 answer choices for each question, you will see JOptionPanes again that will ask you for the 2nd question, and then you’ll be prompted to enter 3 answer choices for that question. 
+
+Afterward, you’ll be asked again to enter the 3rd question, and then you’ll be prompted to enter 3 answer choices for that question. Read below to see what to enter when making the rest of the quiz.
 
 For the 2nd question, make this String the question: “What’s 2+2?”
+
 For the 2nd question, make the 1st answer choice this: “4”
+
 For the 2nd question, make the 2nd answer choice this: “5”
+
 For the 2nd question, make the 3rd answer choice this: “6”
 
 For the 3rd question, make this String the question: “What’s this class?”
+
 For the 3nd question, make the 1st answer choice this: “CS 18000”
+
 For the 3rd question, make the 2nd answer choice this: “CS 19300”
+
 For the 3rd question, make the 3rd answer choice this: “CS 24000”
 
 -Step 10: After you finish making the quiz question and answer choices, you should see this JOptionPane:
