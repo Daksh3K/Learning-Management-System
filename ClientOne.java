@@ -405,7 +405,7 @@ public class ClientOne implements Runnable {
                                                 "You can't have '*' anywhere in your answer choice.",
                                                 "No '*' in answer choice", JOptionPane.ERROR_MESSAGE);
                                     } else {
-                                        answerString += (answerChoice + "**");  //answerChoices made
+                                        answerString += (answerChoice + "**");
                                         break;
                                     }
                                 }
@@ -469,6 +469,7 @@ public class ClientOne implements Runnable {
                                     "enter\nthe new information regarding the quiz, but\nafter " +
                             "you put in all the info, you will receive an\nerror message, and no changes will " +
                                     "be made.", "Editing a quiz!", JOptionPane.QUESTION_MESSAGE);
+                                    //quiz name the teacher wants
                     if (quizName != null) {
                         writer.write("editingQuiz");
                         writer.println();
@@ -483,7 +484,7 @@ public class ClientOne implements Runnable {
                         writer.flush();
 
                         String numberOfQuestions;
-                        int numQuestions = 0;
+                        int numQuestions = 0;  //number of questions in the quiz
                         while (true) {
                             try {
                                 numberOfQuestions = JOptionPane.showInputDialog(null,
@@ -513,12 +514,13 @@ public class ClientOne implements Runnable {
                         }
                         //WE HAVE NUM QUESTIONS
                         String numAnswers;
-                        int numAns = 0;
+                        int numAns = 0;  //number of answer choices for each question
                         while (true) {
                             try {
                                 numAnswers = JOptionPane.showInputDialog(null,
                                         "Enter the number of answer choices for each question",
                                         "Number of answer choices per question", JOptionPane.QUESTION_MESSAGE);
+                                            //number of answer choices being asked
                                 if (numAnswers == null) {
                                     JOptionPane.showMessageDialog(null,
                                             "You must finish editing the quiz", "Must edit quiz",
@@ -543,9 +545,13 @@ public class ClientOne implements Runnable {
                         }
                         //we have num answers
 
-                        String questionString = "";
-                        String answerString = "";
+                        String questionString = "";  //String that has all the questions
+                        String answerString = "";   //String that stores all the answer choices
 
+                        /**
+                         * The for loop below allows the teacher to make the quiz questions and the answer choices
+                         * for each of the questions
+                         */
                         for (int i = 1; i <= numQuestions; i++) {
                             while (true) {
                                 String question = JOptionPane.showInputDialog(null,
@@ -575,7 +581,7 @@ public class ClientOne implements Runnable {
                                     String answerChoice = JOptionPane.showInputDialog(null,
                                             "Enter answer choice " + j + "\n***NOTE: YOU CANNOT HAVE '*' " +
                                                     "IN ANSWER CHOICE", "Enter answer choice",
-                                            JOptionPane.QUESTION_MESSAGE);
+                                            JOptionPane.QUESTION_MESSAGE);  //teacher's answer choice
                                     if (answerChoice == null) {
                                         JOptionPane.showMessageDialog(null,
                                                 "You must finish making this quiz. " +
@@ -590,7 +596,7 @@ public class ClientOne implements Runnable {
                                                 "You can't have '*' anywhere in your answer choice.",
                                                 "No '*' in answer choice", JOptionPane.ERROR_MESSAGE);
                                     } else {
-                                        answerString += (answerChoice + "**");  //answerChoices made
+                                        answerString += (answerChoice + "**");
                                         break;
                                     }
                                 }
@@ -610,11 +616,11 @@ public class ClientOne implements Runnable {
                         writer.println();
                         writer.flush();
 
-                        //tell server quiz is made
                         while (true) {
                             int randomOrNot = JOptionPane.showConfirmDialog(null,
                                     "Do you want the quiz to be randomized",
                                     "Should quiz be randomized?", JOptionPane.YES_NO_OPTION);
+                                        //asking whether quiz should be randomized or not
                             if (randomOrNot != JOptionPane.YES_OPTION && randomOrNot != JOptionPane.NO_OPTION) {
                                 JOptionPane.showMessageDialog(null,
                                         "You must select yes or no.",
@@ -650,6 +656,7 @@ public class ClientOne implements Runnable {
                     String quizToDelete = JOptionPane.showInputDialog(null,
                             "Enter name of quiz you want to delete",
                             "name of quiz you want to delete", JOptionPane.QUESTION_MESSAGE);
+                                //name of quiz teacher is trying to delete
                     if (quizToDelete != null) {
                         writer.write("deleteQuiz");
                         writer.println();
@@ -1130,6 +1137,7 @@ public class ClientOne implements Runnable {
                 public void actionPerformed(ActionEvent e) {
                     String newName = JOptionPane.showInputDialog(null,
                             "Enter new name", "Name change", JOptionPane.QUESTION_MESSAGE);
+                            //new name that student wants
                     if (newName != null) {
                         writer.write("changeName");
                         writer.println();
@@ -1403,6 +1411,9 @@ public class ClientOne implements Runnable {
                             answers = answers.substring(whereDividerAns + 2);
                         }  //populate AnswerSet
                         while (true) {
+                            /**
+                             * student is asked to select their answer for a question
+                             */
                             String userChoice = (String) JOptionPane.showInputDialog(null,
                                     currentQuestion + "\n\n" + "Select answer for Question " + i,
                                     "Enter your answer", JOptionPane.QUESTION_MESSAGE,
@@ -1471,8 +1482,6 @@ public class ClientOne implements Runnable {
                                 "\nHere is the date and time of your submission: " + theDate,
                                 "Successfully submitted quiz!", JOptionPane.INFORMATION_MESSAGE);
                     }
-
-
                     studentQuizMenu.setVisible(true);
 
                 } else if (mesFromSer.equals("updateStudentQuizListWhenCourseEdited")) {  //real time updates
@@ -1522,14 +1531,18 @@ public class ClientOne implements Runnable {
                         whereDivider = quizSheet.indexOf("**");
                     }
                     int numQuestions = Integer.parseInt(bfr.readLine());
-                    int numCorrect = 0;
-                    String finalScoreString = "";
+                    int numCorrect = 0;  //number of questions correct
+                    String finalScoreString = "";   //final score is in form of String and sent to server
 
+                    /**
+                     * Following for loop is used to allow the teacher to grade a quiz that they
+                     * selected
+                     */
                     for (int i = 1; i <= numQuestions; i++) {
                         while (true) {
                             int pointForQuestion = JOptionPane.showConfirmDialog(null,
                                     formattedQuizSheet + "\nGive a point for Question " + i + "?",
-                                    "Give point?", JOptionPane.YES_NO_OPTION);
+                                    "Give point?", JOptionPane.YES_NO_OPTION);  //whether yes or no
                             if (pointForQuestion != JOptionPane.YES_OPTION
                                     && pointForQuestion != JOptionPane.NO_OPTION) {
                                 JOptionPane.showMessageDialog(null,
