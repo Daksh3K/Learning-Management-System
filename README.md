@@ -36,6 +36,8 @@ The purpose of the People class is to create generalized characteristics that bo
 
 ### Quiz.java
 
+The purpose of the Quiz class is for teachers to create something that can be accessed by students, and to let students manipulate the object and give it back to the teacher to look at. A Quiz object is created with a String that contains the quiz title, questions, and answers. A quiz object can be randomized, which means that all the quiz questions are put into a random order and the answer choices for the corresponding question are also put in a random order. A quiz object has the option to be edited upon if the teacher pleases, but they must manually create new quiz questions and answer choices. A teacher can use setters to change the number of questions in a quiz, or the specific quiz questions and answer choices. Quiz.java is tested by creating one quiz object with a String. Next, the methods corresponding to the quiz created manually are executed and returned properly.
+
 ### Question.java
 
 ### Submission.java
