@@ -28,7 +28,7 @@ public class Student extends People implements Serializable {
             ArrayList<Submission> studentSubmission = new ArrayList<>();
             oos.writeObject(studentSubmission);
         } catch (Exception e) {
-            e.printStackTrace();
+            //catch exception
         }
     }
 
@@ -57,7 +57,7 @@ public class Student extends People implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(super.getTextFileName()))) {
             oos.writeObject(newArrayList);
         } catch (Exception e) {
-            e.printStackTrace();
+            //catch exception
         }
     }
 }
