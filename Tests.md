@@ -378,7 +378,7 @@ Expected Result: student changes their name successfully and sees their name cha
 Test Status: Passed
 
 ##  Test 13: Deleting an account
--Step 1: From the student menu where we left off in Step 3 of Test 11, press the “Delete account” button, where you’ll be redirected to the start menu JFrame and a JOptionPane will also show up saying “Account has been deleted”. 
+-Step 1: From the student menu where we left off in Step 3 of Test 12, press the “Delete account” button, where you’ll be redirected to the start menu JFrame and a JOptionPane will also show up saying “Account has been deleted”. 
 
 -Step 2: Press “OK” on the JOptionPane and then press “Login”. 
 
