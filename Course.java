@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * or edit quizzes for each course
  *
  * @author Yu Hyun Kim
- * @version 11/14/21
+ * @version 12/12/21
  */
 
 public class Course implements Serializable {
