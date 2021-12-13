@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class Course implements Serializable {
     private String courseName;  //name of course
-    private String courseTextFileName; //name of the text file where course data is stored
-    private String teacherWhoMadeCourse; //information about teacher who created the course
-    //text file for the course (text file contains arrayList of Quiz objects)
+    private String courseTextFileName;  //text file name for the course (text file contains arrayList of Quiz objects)
+    private String teacherWhoMadeCourse;  //email of teacher who made course
+
 
     /**
      * Constructor for the Course class
@@ -35,13 +35,13 @@ public class Course implements Serializable {
             ArrayList<Quiz> quizzes = new ArrayList<>();
             oos.writeObject(quizzes);
         } catch (Exception e) {
-            e.printStackTrace();
+            //exception caught
         }
     }
 
     /**
      * returns the course name
-     * @return String containing the course name
+     * @return String containing course name
      */
     public String getCourseName() {
         return courseName;
@@ -84,7 +84,7 @@ public class Course implements Serializable {
     /**
      * Method puts the new ArrayList of quiz objects into the
      * course's text file
-     * @param newArrayList The ArrayList to be written into the course text file
+     * @param newArrayList the new ArrayList of Quiz objects
      */
     public void updateQuizInFile(ArrayList<Quiz> newArrayList) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(courseTextFileName))) {
