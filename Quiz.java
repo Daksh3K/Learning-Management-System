@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,17 +10,17 @@ import java.util.Collections;
  * @author Cole Priser
  * @version December 11 2021
  */
+public class Quiz implements Serializable {
+    private String quizName;
+    private String questions;
+    private String answers;
+    private int numQuestions;
+    private int numAnswers;
+    private boolean isRandom;
+    private String teacherEmail;
+    private String randomQuestion;
+    private String randomAnswer;
 
-public class Quiz {
-    private String quizName; //Name of Quiz
-    private String questions; //Questions in the quiz
-    private String answers; //answers of the questions
-    private int numQuestions; //number of questions in quiz
-    private int numAnswers; //number of answer choices for each question in quiz
-    private boolean isRandom; //decides if quiz questions and answer choices will be put in random order
-    private String teacherEmail; //email of teacher that creates quiz
-    private String randomQuestion; //randomized order of questions
-    private String randomAnswer; //randomized order of answer choices for a question
 
     /**
      * Constructor to create a quiz object using a file that contains the quiz
@@ -32,7 +33,8 @@ public class Quiz {
      * @param isRandom     decides if quiz questions and answer choices will be put in random order
      * @param teacherEmail email of the teacher that created the quiz
      */
-    public Quiz(String quizName, String questions, String answers, int numQuestions, int numAnswers, boolean isRandom, String teacherEmail) {
+    public Quiz(String quizName, String questions, String answers, int numQuestions,
+                int numAnswers, boolean isRandom, String teacherEmail) {
         this.quizName = quizName;
         this.questions = questions;
         this.answers = answers;
@@ -49,15 +51,6 @@ public class Quiz {
      */
     public String getQuizName() {
         return quizName;
-    }
-
-    /**
-     * Method to set the name of the quiz
-     *
-     * @param quizName is new name of quiz
-     */
-    public void setQuizName(String quizName) {
-        this.quizName = quizName;
     }
 
     /**
