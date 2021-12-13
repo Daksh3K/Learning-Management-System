@@ -23,8 +23,8 @@ This will allow you to have full access to the program, as the server and client
 ** 2 additional pieces of information
 
 1) The port number we used for the sockets is 1234 (this is also mentioned in the documentation/comments in the LmsMain class)
-2) If you see our video presentation, we do a demo where multiple users utilizing DIFFERENT machines are able to utilize our program. When we did that demo, we
-changed the part in the ClientOne class where you would put "localhost" when making a socket to an address that belongs to the machine that hosted the server-side code.
+2) If you see our video presentation, we performed a demo where multiple users utilizing DIFFERENT machines are able to utilize our program. When we did that demo, we
+changed the part in the ClientOne class where you would put "localhost", when making a socket, to an ip address that belongs to the machine that hosted the server-side code.
 
 ***If you look at ClientOne.java, you will notice that it says "localhost". We made it this way because we are assuming that you will have BOTH the server-side code AND client
 side code on the same machine when testing our program.*** 
