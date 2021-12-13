@@ -40,6 +40,8 @@ The purpose of the Quiz class is for teachers to create something that can be ac
 
 ### Question.java
 
+The purpose of the Question class is to assist the Quiz class with the randomization selection. A question object has an ArrayList of Strings that act as answer choices, and a corresponding question that is a String. The question class only contains getter methods to return the question with its corresponding answer choices. Question.java is tested by creating a question with a String that is the question, along with an ArrayList of strings that is the answer choices. The methods return the question and answer choices properly. 
+
 ### Submission.java
 
 ### Student.java
