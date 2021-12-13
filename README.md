@@ -25,6 +25,8 @@ This class is also part of the server-side code. After a client connects to the 
 
 ### ClientOne.java:
 
+This class contains all of the client-side code. In order for clients to connect to the server, all they have to do is run this class. The ClientOne.java class creates and displays all the GUIs (JFrames and JOptionPanes) and creates a Thread that causes the run() method in the ClientOne class to run. The run() method inside the ClientOne class serves a similar function to the run() method inside the EchoServer class; there's a loop that receives Strings sent from the server and sometimes, depending on what the client is doing, the run() method inside the ClientOne class will also send Strings back to the server. Everytime something happens where any user's JFrame needs to reflect new information, the loop inside the run() method that's in the ClientOne class will handle that, allowing for real time updates to happen by getting the new information that's sent from the server. Since there are buttons in our JFrames, there are several ActionListeners, one for each button. Depending on what button is pressed, there will be a certain String that notifies the server what the user is trying to do, and there will also be certain information (also in the form of Strings) that's sent to the server, and the information sent depends on what the user is trying to do. 
+
 ### People.java
 
 ### Student.java
