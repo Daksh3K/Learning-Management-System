@@ -58,6 +58,9 @@ The Student class represents a student user in the program. Objects of the stude
 
 ### Teacher.java
 
+The Teacher class represents a Teacher user in the program. Objects of the teacher class contain 2 String fields for storing the teacher's name and email. This class extends the People class and inherits all its methods such as the getters and setters for the name and email, deleting the user, and getting the name of the text file associated with the Teacher object. The name and email of the Teacher have to be unique. Whenever a Teacher object is created, the constructor also creates a text file associated with the Teacher. This text file stores an ArrayList of Course objects.
+
 ### Course.java
 
-### State.java
+The Course class represents a course that a teacher can make. It contains three String fields for storing the name of the course, the information about the teacher who made the course, and the text file associated with the course. The text file is meant to store an ArrayList of Quiz objects that the teacher creates for that course. This class also contains methods for getting the course name, information about the teacher who created the course, and the file name of text file associated with the course object. There are also methods for reading the text file associated with the course and returning an Arraylist of Quiz objects that were stored in the text file, and for updating the ArrayList of Quiz objects stored withing the text file with an ArrayList of Quiz objects.
+
