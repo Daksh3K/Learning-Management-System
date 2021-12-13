@@ -44,6 +44,8 @@ The purpose of the Question class is to assist the Quiz class with the randomiza
 
 ### Submission.java
 
+This class is used to create Submission objects that represent a quiz submission that a student makes. Objects of the Submission class have a String that consists of the quiz questions and the student’s answers to those questions, a String that stores the email of the teacher that made the quiz that the student submitted, a String that represents the grade that the teacher gave for the student, a String for the name of the quiz taken, and an integer of the number of question in the quiz that the student submitted. Inside the Submission class is a constructor that instantiates the instance variables listed above when a submission object is made, and there are several getter and setter methods. Submission objects are made in the main method (which is located in the LmsMain class), and the getter and setter methods are also used in the main method. Specifically, the getter methods are used when the teacher object calls them; this is done so the teacher can see the quiz details of the students’ submissions. Furthermore, the getters are used in the main method in order to find out whether a student is retaking a quiz or not. Additionally, the setter method is used by the teacher object when the teacher is giving the student a grade. Submission objects are stored in each student’s unique text file; this is how the data regarding quiz submissions is stored. This class is tested when students submit a quiz and teachers can view them using all the Submission.java methods.
+
 ### Student.java
 
 ### Teacher.java
