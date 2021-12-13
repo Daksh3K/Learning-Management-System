@@ -253,7 +253,7 @@ Test Status: Passed
 
 ## Test 7: Logging out of a teacher account
 
--Step 1: Starting from the “Manage Quizzes” JFrame which is where we ended Test 5, click the “X” at the top right corner of the JFrame. You should see the “Your created courses” JFrame.
+-Step 1: Starting from the “Manage Quizzes” JFrame which is where we ended Test 6, click the “X” at the top right corner of the JFrame. You should see the “Your created courses” JFrame.
 
 -Step 2: On the top right corner of “Your created courses” JFrame, click the “X’. You should see the teacher menu JFrame.
 
