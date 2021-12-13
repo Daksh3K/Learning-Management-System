@@ -4,17 +4,21 @@ Group members: Yu Hyun Kim, Cole Priser, Dakshesh Gupta
 ## How to compile and run our program.
 ***Before we begin, please know that our program was made using IntelliJ, and the instructions below should also be done in IntelliJ.
 
-First, create a project on IntelliJ, and in the src folder, put all the classes inside it. Meanwhile, place all the text files outside of the src folder, but inside the project folder.
+First, create a project on IntelliJ, and in the src folder, put all the classes inside it. 
 
-The classes that are NOT testing classes are Course, LmsMain, People, Question, Quiz, Student, Submission, and Teacher; all other classes are testing classes.
+The classes (.java files) are the following: LmsMain.java, EchoServer.java, ClientOne.java, People.java, Quiz.java, Question.java, Submission.java, Student.java, Teacher.java, and Course.java.
 
-In order to run the program, first, you must run EchoServer.java
+Meanwhile, place all the text files outside of the src folder, but inside the project folder.
 
-Next, you run ClientOne.java
+The text files that should be present are People.txt and Courses.txt
+
+***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time at any point, make sure that the People.txt and Courses.txt file are empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly. 
+
+In order to run the program, first, you must run LmsMain.java. When you run LmsMain.java class, you will be running the server.
+
+Next, you run the ClientOne.java class. When you run the ClientOne.java class, you will be running the client-side code. 
 
 This will allow you to have full access to the program, as the server and client will connect. From here, you can use the learning management system. You have to run the server before the client, as otherwise, the program won't work properly.
-
-***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time, make sure that the People.txt file is empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly.
 
 ## Who Submitted Which Parts on BrightSpace/Vocareum
 Dakshesh Gupta submitted the Vocareum workspace
