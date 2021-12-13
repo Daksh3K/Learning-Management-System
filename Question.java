@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @author Cole Priser
  * @version December 11 2021
  */
-public class Question {
+public class Question implements Serializable {
     private ArrayList<String> answerChoices;
     private String question;
 
@@ -42,4 +43,3 @@ public class Question {
         return answerChoices;
     }
 }
-
