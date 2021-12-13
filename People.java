@@ -4,23 +4,23 @@ import java.util.ArrayList;
 /**
  * The People class
  * Parent class of Teacher and Student
- * <p>
+ *
  * The Teachers' and Students' names are stored
  *
+ * @version December 12 2021
  * @author Yu Hyun Kim
- * @version December 11 2021
  */
+
 public class People implements Serializable {
     private String name;  //name of Teacher or Student
     private String email;  //email of Teacher or Student
-    private String textFileName; //the text file that stores person
+    private String textFileName;
 
     /**
      * constructor for People class
      * instantiates the name and email instance variables
-     *
-     * @param name  the name of the person
-     * @param email the email of the person
+     * @param name
+     * @param email
      */
     public People(String name, String email) {
         this.name = name;
@@ -29,43 +29,26 @@ public class People implements Serializable {
     }
 
     /**
-     * Method to get the name of the person
-     *
-     * @return String
+     * getter methods for getting the value of name and email instance variables
      */
     public String getName() {
         return name;
     }
 
-    /**
-     * Method to get the email of the person
-     *
-     * @return String
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * Method to get the text file associated with the person
-     *
-     * @return String
-     */
     public String getTextFileName() {
         return textFileName;
     }
 
-    /**
-     * Method to set the name of the person
-     *
-     * @param newName is the new name of the person
-     */
     public void setName(String newName) {
         this.name = newName;
     }
 
     /**
-     * Method to delete a user
+     * Method to delete user's account and their .txt file
      */
     public void deleteUser() {
         ArrayList<People> people = LmsMain.getPeopleListInFile();
@@ -79,4 +62,5 @@ public class People implements Serializable {
             }
         }
     }
+
 }
