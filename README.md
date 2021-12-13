@@ -21,7 +21,7 @@ Next, you run the ClientOne.java class. When you run the ClientOne.java class, y
 This will allow you to have full access to the program, as the server and client will connect. From here, you can use the learning management system. You have to run the server before the client, as otherwise, the program won't work properly.
 
 ## Who Submitted Which Parts on BrightSpace/Vocareum
-Dakshesh Gupta submitted the Vocareum workspace
+Dakshesh Gupta submitted the Vocareum workspace and Video Presentation
 
 Yu Hyun Kim submitted the report
 
