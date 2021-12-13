@@ -158,22 +158,63 @@ Test Status: Passed
 
 ![createQuizNumQuestions](https://user-images.githubusercontent.com/89658307/145690748-3960d39f-3fc6-4ca3-82cf-68629ee0da0f.PNG)
 
--Step 4: Enter the number “3” in the text box and press the “OK” button. You will see this JOptionPane now:
+-Step 4: Enter the number “1” in the text box and press the “OK” button. You will see this JOptionPane now: 
 
 ![quizAnswerChoices](https://user-images.githubusercontent.com/89658307/145690759-6a49dbc3-920a-455d-b1a2-712f3e03fed0.PNG)
 
--Step 5: Enter the number “3” in the text box and press the “OK” button. You will then see this JOptionPane:
+-Step 5: Enter the number “1” in the text box and press the “OK” button. You will then see this JOptionPane:
 
 ![1stQuestionForQuiz](https://user-images.githubusercontent.com/89658307/145690769-24438fcd-0c2c-4bfe-8905-0997fc8461cf.PNG)
 
--Step 6: In the text field, enter “What’s 1+1?” and press the “OK” button. You will see this JOptionPane:
+-Step 6: In the text field, enter “Question 1?” and press the “OK” button. You will then see this JOptionPane:
 
 ![answerChoiceFor1stQuestion](https://user-images.githubusercontent.com/89658307/145690774-9e528b25-8f7f-4b8f-8062-4335018d8282.PNG)
 
--Step 7: In the text field, enter “1” and press the “OK” button. You will see the above JOptionPane again but it will ask you to enter answer choice 2.
--Step 8: In the text field, enter “2” and press the “OK” button. You will see the JOptionPane again asking for answer choice 3. 
--Step 9: In the text field, enter “3” and press the “OK” button.
--Step 10: Now, you have made the first question and the 3 answer choices for the question. Since we indicated that we wanted to have 3 questions in total with 3 answer choices for each question, you will see JOptionPanes again that will ask you for the 2nd question, and then you’ll be prompted to enter 3 answer choices for that question. Afterward, you’ll be asked again to enter the 3rd question, and then you’ll be prompted to enter 3 answer choices for that question. Read below to see what to enter when making the rest of the quiz.
+-Step 7: In the text field, enter “Answer 1” and press the “OK” button.
+
+-Step 8: After you finish making the quiz question and answer choices, you should see this JOptionPane:
+
+![randomizeQuiz](https://user-images.githubusercontent.com/89658307/145786660-dfedbaa9-bcf4-435c-87f0-e3d4758c884d.PNG)
+
+-Step 9: Press the “No” button to NOT randomize the order of questions and answer choices for each question.
+
+-Step 10: If you followed the steps correctly up to now, there should be no JOptionPane and only the JFrame that looks like this:
+
+![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145786731-87e2f657-1f0d-4d59-9f12-d4d68235b54e.PNG)
+
+Notice how as soon as the quiz is finished being made, there are real time updates displaying the new quiz we just made in the quizzes menu JFrame. 
+
+Expected Result: Teacher successfully edits a course and creates a quiz
+
+Test Status: Passed
+
+## Test 6: Editing a quiz
+We just made a quiz, but let’s edit the quiz. You should still be seeing the JFrame shown in the picture in Step 10 Test 5.
+
+-Step 1: Click the “Edit Quiz” button to get a JOptionPane that looks like this: 
+
+![editQuizJOption](https://user-images.githubusercontent.com/89658307/145786972-df8df9b0-0deb-4d0d-9e4d-25f11a987793.PNG)
+
+-Step 2: Enter “Quiz1” (The name of the quiz we want to edit) in the text box and press the “OK” button. You will see this JOptionPane afterwards:
+
+![createQuizNumQuestions](https://user-images.githubusercontent.com/89658307/145787198-eea6fb6f-538f-4649-aecb-4861401fccdb.PNG)
+
+-Step 3: Enter the number “3” in the text box and press the “OK” button. You will see this JOptionPane now:
+
+![quizAnswerChoices](https://user-images.githubusercontent.com/89658307/145787273-cda206eb-a9b7-4dcd-b959-eaa94cdd809f.PNG)
+
+-Step 4: Enter the number “3” in the text box and press the “OK” button. You will then see this JOptionPane:
+
+![1stQuestionForQuiz](https://user-images.githubusercontent.com/89658307/145787324-7af0b970-045a-4fc4-84d8-763cd2a9c049.PNG)
+
+-Step 5: In the text field, enter “What’s 1+1?” and press the “OK” button. You will then see this JOptionPane:
+
+![answerChoiceFor1stQuestion](https://user-images.githubusercontent.com/89658307/145787359-b551b996-52e8-4197-adda-07f4d324192b.PNG)
+
+-Step 6: In the text field, enter “1” and press the “OK” button. You will see the above JOptionPane again but it will ask you to enter answer choice 2.
+-Step 7: In the text field, enter “2” and press the “OK” button. You will see the JOptionPane again asking for answer choice 3. 
+-Step 8: In the text field, enter “3” and press the “OK” button.
+-Step 9: Now, you have made the first question and the 3 answer choices for the question. Since we indicated that we wanted to have 3 questions in total with 3 answer choices for each question, you will see JOptionPanes again that will ask you for the 2nd question, and then you’ll be prompted to enter 3 answer choices for that question. Afterward, you’ll be asked again to enter the 3rd question, and then you’ll be prompted to enter 3 answer choices for that question. Read below to see what to enter when making the rest of the quiz.
 
 For the 2nd question, make this String the question: “What’s 2+2?”
 For the 2nd question, make the 1st answer choice this: “4”
@@ -185,23 +226,21 @@ For the 3nd question, make the 1st answer choice this: “CS 18000”
 For the 3rd question, make the 2nd answer choice this: “CS 19300”
 For the 3rd question, make the 3rd answer choice this: “CS 24000”
 
--Step 11: After you finish making the quiz question and answer choices, you should see this JOptionPane:
+-Step 10: After you finish making the quiz question and answer choices, you should see this JOptionPane:
 
 ![randomizeQuiz](https://user-images.githubusercontent.com/89658307/145690783-9fdf1f27-6b91-4551-9e8c-b0a99817c2a4.PNG)
 
--Step 12: Press the “Yes” button to randomize the order of questions and answer choices for each question.
+-Step 11: Press the “Yes” button to randomize the order of questions and answer choices for each question.
 
--Step 13: If you followed the steps correctly up to now, there should be no JOptionPane and only the JFrame that looks like this:
+-Step 12: If you followed the steps correctly up to now, there should be no JOptionPane and only the JFrame that looks like this:
 
 ![updatedQuizMenu](https://user-images.githubusercontent.com/89658307/145690785-179c778f-642f-480e-ab02-981e7e4037a5.PNG)
 
-Notice how as soon as the quiz is finished being made, there are real time updates displaying the new quiz we just made in the quizzes menu JFrame. 
-
-Expected Result: Teacher successfully edits a course and creates a quiz
+Expected Result: Teacher successfully edits a quiz
 
 Test Status: Passed
 
-## Test 6: Logging out of a teacher account
+## Test 7: Logging out of a teacher account
 
 -Step 1: Starting from the “Manage Quizzes” JFrame which is where we ended Test 5, click the “X” at the top right corner of the JFrame. You should see the “Your created courses” JFrame.
 
