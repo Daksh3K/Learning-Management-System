@@ -263,7 +263,7 @@ Expected Result: Starting from the quiz JFrame, a teacher was able to logout of 
 
 Test Status: Passed
 
-## Test 7: Log in as student
+## Test 8: Log in as student
 -Step 1: using the student account we made earlier, let’s login to our student account. Click the “Login” button on the “Start Menu” JFrame, enter “studentEmail” (this was the email we used earlier to create the student account) in the text field, and press the “OK” button. You should see this student menu after logging in:
 
 ![studentMenu](https://user-images.githubusercontent.com/89658307/145702979-90cd6438-e6d5-4975-8df8-8e84f344d05a.PNG)
