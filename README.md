@@ -11,6 +11,9 @@ The classes that are NOT testing classes are Course, LmsMain, People, Question, 
 ***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time, make sure that the People.txt file is empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly.
 
 ## Who Submitted Which Parts on BrightSpace/Vocareum
+Dakshesh Gupta submitted the Vocareum workspace
+
+Yu Hyun Kim submitted the report
 
 ## Description of Classes
 
