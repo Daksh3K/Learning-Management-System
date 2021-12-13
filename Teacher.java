@@ -9,7 +9,7 @@ import java.util.*;
  * their courses and quizzes.
  *
  * @author Dakshesh Gupta
- * @version final
+ * @version 12/12/21
  */
 public class Teacher extends People implements Serializable {
 
