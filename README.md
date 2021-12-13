@@ -32,14 +32,18 @@ This class contains all of the client-side code. In order for clients to connect
 
 ### People.java
 
-### Student.java
-
-### Teacher.java
-
-### Course.java
+The purpose of the People class is to create generalized characteristics that both Students and Teachers have, including a name, email, and text file name. This class creates a People object with a name, email, and text file name, and allows access to these fields through getters. There is also a setter that allows the name of a person to be changed, as well as a method that deletes a user from the list of people that have been created at that point. People.java was tested by creating a People object with a name, email, and text file name. Next, this object was called by the name, email, and text file getters, where it properly returned the object's name/email/text file name. Next, the name of the object was changed properly using a name setter. Finally, a user was properly deleted.
 
 ### Quiz.java
 
 ### Question.java
 
 ### Submission.java
+
+### Student.java
+
+### Teacher.java
+
+### Course.java
+
+### State.java
