@@ -243,7 +243,7 @@ For the 3rd question, make the 3rd answer choice this: “CS 24000”
 
 -Step 11: Press the “Yes” button to randomize the order of questions and answer choices for each question.
 
--Step 12: If you followed the steps correctly up to now, there should be no JOptionPane and only the JFrame that looks like this:
+-Step 12: If you followed the steps correctly up to now, you should see a JOptionPane that says "Successfully edited quiz" and there should be a JFrame that looks like this:
 
 ![updatedQuizMenu](https://user-images.githubusercontent.com/89658307/145690785-179c778f-642f-480e-ab02-981e7e4037a5.PNG)
 
