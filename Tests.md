@@ -180,7 +180,7 @@ Test Status: Passed
 
 -Step 10: If you followed the steps correctly up to now, there should be no JOptionPane and only the JFrame that looks like this:
 
-![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145786731-87e2f657-1f0d-4d59-9f12-d4d68235b54e.PNG)
+![updatedQuizMenu](https://user-images.githubusercontent.com/89658307/145877756-4d764073-2a52-4995-8f06-4419790b5ae8.PNG)
 
 Notice how as soon as the quiz is finished being made, there are real time updates displaying the new quiz we just made in the quizzes menu JFrame. 
 
