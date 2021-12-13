@@ -361,7 +361,7 @@ Expected Result: student logs in and sees the teacher’s grade
 Test Status: Passed
 
 ## Test 12: Editing a user’s account
--Step 1: From the JFrame in Step 2 of Test 10, press the “X” on the top right of the JFrame and you will return to the student menu.
+-Step 1: From the JFrame in Step 2 of Test 11, press the “X” on the top right of the JFrame and you will return to the student menu.
 
 -Step 2: There will be a button that says “Edit name”. Click that button to see this:
 
