@@ -12,7 +12,7 @@ Meanwhile, place all the text files outside of the src folder, but inside the pr
 
 The text files that should be present are People.txt and Courses.txt
 
-***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time at any point, make sure that the People.txt and Courses.txt file are empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly. 
+***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time at any point, make sure that the People.txt and Courses.txt file are empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly. ***
 
 In order to run the program, first, you must run LmsMain.java. When you run LmsMain.java class, you will be running the server.
 
@@ -25,8 +25,9 @@ This will allow you to have full access to the program, as the server and client
 1) The port number we used for the sockets is 1234 (this is also mentioned in the documentation/comments in the LmsMain class)
 2) If you see our video presentation, we do a demo where multiple users utilizing DIFFERENT machines are able to utilize our program. When we did that demo, we
 changed the part in the ClientOne class where you would put "localhost" when making a socket to an address that belongs to the machine that hosted the server-side code.
+
 ***If you look at ClientOne.java, you will notice that it says "localhost". We made it this way because we are assuming that you will have BOTH the server-side code AND client
-side code on the same machine when testing our program. 
+side code on the same machine when testing our program.*** 
 
 ## Who Submitted Which Parts on BrightSpace/Vocareum
 Dakshesh Gupta submitted the Vocareum workspace and Video Presentation
