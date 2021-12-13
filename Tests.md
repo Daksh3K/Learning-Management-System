@@ -272,7 +272,7 @@ Expected Result: user successfully logs in as a student and sees the student men
 
 Test Status: Passed
 
-## Test 8: Taking a quiz
+## Test 9: Taking a quiz
 -Step 1: From the student menu, press the “View Courses To Take Quizzes” Button. You will see this on your screen afterward:
 
 ![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145704656-9c4574de-30c7-4fa8-8ffd-0ba1fe56d94d.PNG)
@@ -309,7 +309,7 @@ Expected Result: the student chooses the course, the quiz, takes the quiz, and s
 
 Test Status: Passed
 
-## Test 9: Making sure Data Is Saved Even if User doesn’t log out or program crashes/shuts down through teacher logging in and grading the quiz taken.
+## Test 10: Making sure Data Is Saved Even if User doesn’t log out or program crashes/shuts down through teacher logging in and grading the quiz taken.
 We left off at the student submitting their quiz and seeing the list of quizzes that exist (The JFrame shown in Step 7 of Test 8).
 
 -Step 1: Stop the server side and client side code (LmsMain.java and ClientOne.java). After you do this, there should be no JOptionPanes or JFrames showing. 
@@ -344,7 +344,7 @@ Expected Result: teacher successfully logs in after the server shuts down and se
 
 Test Status: Passed
 
-## Test 10: Seeing the grade the teacher gave
+## Test 11: Seeing the grade the teacher gave
 -Step 1: Press the “Login” button and enter “studentEmail” in the text field. Press the “OK” button to login and see the student menu JFrame. You should see this now:
 
 ![studentMenu](https://user-images.githubusercontent.com/89658307/145704793-e17a09ff-5ac6-4226-8c8c-cd962722a923.PNG)
@@ -359,7 +359,7 @@ Expected Result: student logs in and sees the teacher’s grade
 
 Test Status: Passed
 
-## Test 11: Editing a user’s account
+## Test 12: Editing a user’s account
 -Step 1: From the JFrame in Step 2 of Test 10, press the “X” on the top right of the JFrame and you will return to the student menu.
 
 -Step 2: There will be a button that says “Edit name”. Click that button to see this:
@@ -376,7 +376,7 @@ Expected Result: student changes their name successfully and sees their name cha
 
 Test Status: Passed
 
-##  Test 12: Deleting an account
+##  Test 13: Deleting an account
 -Step 1: From the student menu where we left off in Step 3 of Test 11, press the “Delete account” button, where you’ll be redirected to the start menu JFrame and a JOptionPane will also show up saying “Account has been deleted”. 
 
 -Step 2: Press “OK” on the JOptionPane and then press “Login”. 
