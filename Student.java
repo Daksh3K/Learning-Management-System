@@ -12,8 +12,8 @@ import java.util.*;
  * There are methods in this class that deal with deleting the student account,
  * outputting the student menu, and getting the arrayList of Submission objects
  *
- * @author Yu Hyun Kim, Jasper Ye
- * @version 11/14/21
+ * @author Yu Hyun Kim
+ * @version 12/12/21
  */
 public class Student extends People implements Serializable {
 
