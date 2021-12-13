@@ -42,7 +42,7 @@ When you do these two things, you should see a start menu pop up:
 
 ![enterEmailCreatingAccount](https://user-images.githubusercontent.com/89658307/145688046-406d97f7-7867-439f-aad0-8c23386dcc39.PNG)
 
-Step 4: Once you enter the email, you should see a JOptionPane that looks like the image below:
+-Step 4: Once you enter the email, you should see a JOptionPane that looks like the image below:
 
 ![enterRoleCreatingAccount](https://user-images.githubusercontent.com/89658307/145688054-0053d5ff-87e6-4aa0-80c1-ae5954f089b0.PNG)
 
@@ -51,7 +51,7 @@ Since we are making a student account, press the “Yes” button.
 
 Expected Result: Successfully entered the account info through the JOptionPane windows and no error messages should pop up, which indicates that we have successfully created our student account
 
-Test Result: Passed.
+Test Status: Passed
 
 ## Test 2: Making Teacher Account
 We just made our student account, and now we are going to make a student account. You should at this point only see the Start Menu.
@@ -84,7 +84,7 @@ Since we want to make a teacher account, press the “No” button, and afterwar
 
 Expected Result: We tried to create a teacher account with the name “teacherName” and email “studentEmail”, but received an error notifying us that the email was already used. Therefore, we used the email “teacherEmail” instead, and we successfully created our teacher account afterward.
 
-Test Result: Success
+Test Status: Success
 
 ## Test 3: Logging into TEACHER account
 After finishing Test 2, we should see the “Start Menu” JFrame. 
@@ -99,7 +99,7 @@ After finishing Test 2, we should see the “Start Menu” JFrame.
 
 Expected Result: login using our email that we made for the teacher account, and once logged in, see the teacher menu.
 
-Result: success
+Test Status: Passed
 
 ## Test 4: Managing Courses
 
@@ -143,7 +143,7 @@ Notice that there are real time updates happening: as soon as a course is made, 
 
 Expected Result: Teacher that’s logged in goes to see their created courses and tries to edit and delete a course that doesn’t exist, therefore getting a JOptionPane error message. Therefore, the teacher tries to create a course called “Course1”, and that action is reflected immediately and automatically.
 
-Result: success
+Test Status: Passed
 
 ## Test 5: Managing quizzes for a course
 -Step 1: Now that we made the “Course1” course, let’s edit that course to manage quizzes. Press the “Edit Course” button, and enter “Course1” in the text field of the JOptionPane. Press the “OK” button and you should see this JFrame now:
@@ -197,6 +197,10 @@ For the 3rd question, make the 3rd answer choice this: “CS 24000”
 
 Notice how as soon as the quiz is finished being made, there are real time updates displaying the new quiz we just made in the quizzes menu JFrame. 
 
+Expected Result: Teacher successfully edits a course and creates a quiz
+
+Test Status: Passed
+
 ## Test 6: Logging out of a teacher account
 
 -Step 1: Starting from the “Manage Quizzes” JFrame which is where we ended Test 5, click the “X” at the top right corner of the JFrame. You should see the “Your created courses” JFrame.
@@ -205,11 +209,18 @@ Notice how as soon as the quiz is finished being made, there are real time updat
 
 -Step 3: In order to logout, either click the “Logout” button or the “X” at the top right corner of the teacher menu JFrame. You should see the start menu screen that has the “Create Account” button and “Login” button. You’ve successfully logged out of your account.
 
-Expected result: Starting from the quiz JFrame, a teacher was able to logout of their account
+Expected Result: Starting from the quiz JFrame, a teacher was able to logout of their account
+
+Test Status: Passed
+
 ## Test 7: Log in as student
 -Step 1: using the student account we made earlier, let’s login to our student account. Click the “Login” button on the “Start Menu” JFrame, enter “studentEmail” (this was the email we used earlier to create the student account) in the text field, and press the “OK” button. You should see this student menu after logging in:
 
 ![studentMenu](https://user-images.githubusercontent.com/89658307/145702979-90cd6438-e6d5-4975-8df8-8e84f344d05a.PNG)
+
+Expected Result: user successfully logs in as a student and sees the student menu.
+
+Test Status: Passed
 
 ## Test 8: Taking a quiz
 -Step 1: From the student menu, press the “View Courses To Take Quizzes” Button. You will see this on your screen afterward:
@@ -246,6 +257,8 @@ Expected result: Starting from the quiz JFrame, a teacher was able to logout of 
 
 Expected Result: the student chooses the course, the quiz, takes the quiz, and successfully submits their quiz.
 
+Test Status: Passed
+
 ## Test 9: Making sure Data Is Saved Even if User doesn’t log out or program crashes/shuts down through teacher logging in and grading the quiz taken.
 We left off at the student submitting their quiz and seeing the list of quizzes that exist (The JFrame shown in Step 7 of Test 8).
 
@@ -279,6 +292,8 @@ We see that the data regarding the student’s quiz submission is stored, and ev
 
 Expected Result: teacher successfully logs in after the server shuts down and sees the student’s quiz submission. The teacher grades the student’s quiz.
 
+Test Status: Passed
+
 ## Test 10: Seeing the grade the teacher gave
 -Step 1: Press the “Login” button and enter “studentEmail” in the text field. Press the “OK” button to login and see the student menu JFrame. You should see this now:
 
@@ -290,7 +305,9 @@ Expected Result: teacher successfully logs in after the server shuts down and se
 
 While the top part of the text area can be different from what you see above, the text starting below the submission time and date (in the example above, the submission time and date is referring to the line that says “12/12/2021 02:12:52”) should be the same. 
 
-Expected result: student logs in and sees the teacher’s grade
+Expected Result: student logs in and sees the teacher’s grade
+
+Test Status: Passed
 
 ## Test 11: Editing a user’s account
 -Step 1: From the JFrame in Step 2 of Test 10, press the “X” on the top right of the JFrame and you will return to the student menu.
@@ -307,6 +324,8 @@ Notice how the name change is automatically reflected in the Welcome message in 
 
 Expected Result: student changes their name successfully and sees their name change reflected in real time.
 
+Test Status: Passed
+
 ##Test 12: Deleting an account
 -Step 1: From the student menu where we left off in Step 3 of Test 11, press the “Delete account” button, where you’ll be redirected to the start menu JFrame and a JOptionPane will also show up saying “Account has been deleted”. 
 
@@ -318,5 +337,6 @@ Expected Result: student changes their name successfully and sees their name cha
 
 This is expected since we just deleted our student account.
 
-Expected result: student deletes their account. When trying to login using the account the student used to make the account that was just deleted, an error message pops up for the user.
+Expected Result: student deletes their account. When trying to login using the account the student used to make the account that was just deleted, an error message pops up for the user.
 
+Test Status: Passed
