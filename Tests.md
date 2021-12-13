@@ -275,7 +275,8 @@ Test Status: Passed
 ## Test 9: Taking a quiz
 -Step 1: From the student menu, press the “View Courses To Take Quizzes” Button. You will see this on your screen afterward:
 
-![studentQuizMenu](https://user-images.githubusercontent.com/89658307/145704656-9c4574de-30c7-4fa8-8ffd-0ba1fe56d94d.PNG)
+![studentCourseMenu](https://user-images.githubusercontent.com/89658307/145789027-ee752f61-212e-42ea-aac8-5fe6ae04d2bc.PNG)
+
 
 -Step 2: Press the “View Course’s quizzes” button and you’ll see this JOptionPane:
 
