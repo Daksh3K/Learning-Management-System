@@ -8,6 +8,12 @@ First, create a project on IntelliJ, and in the src folder, put all the classes 
 
 The classes that are NOT testing classes are Course, LmsMain, People, Question, Quiz, Student, Submission, and Teacher; all other classes are testing classes.
 
+In order to run the program, first, you must run EchoServer.java
+
+Next, you run ClientOne.java
+
+This will allow you to have full access to the program, as the server and client will connect. From here, you can use the learning management system. You have to run the server before the client, as otherwise, the program won't work properly.
+
 ***IMPORTANT: Make sure that if you want to run the program as if it is being run for the first time, make sure that the People.txt file is empty, and that only the text files that are submitted on the Vocareum workspace exist. If you don't do this, testing and non testing classes will not function properly.
 
 ## Who Submitted Which Parts on BrightSpace/Vocareum
