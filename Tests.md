@@ -188,7 +188,7 @@ Expected Result: Teacher successfully edits a course and creates a quiz
 Test Status: Passed
 
 ## Test 6: Editing a quiz
-We just made a quiz, but let’s edit the quiz. You should still be seeing the JFrame shown in the picture in Step 10 Test 5.
+We just made a quiz, but let’s edit the quiz. You should still be seeing the JFrame shown in the picture in Step 10 of Test 5.
 
 -Step 1: Click the “Edit Quiz” button to get a JOptionPane that looks like this: 
 
@@ -310,7 +310,7 @@ Expected Result: the student chooses the course, the quiz, takes the quiz, and s
 Test Status: Passed
 
 ## Test 10: Making sure Data Is Saved Even if User doesn’t log out or program crashes/shuts down through teacher logging in and grading the quiz taken.
-We left off at the student submitting their quiz and seeing the list of quizzes that exist (The JFrame shown in Step 7 of Test 8).
+We left off at the student submitting their quiz and seeing the list of quizzes that exist (The JFrame shown in Step 7 of Test 9).
 
 -Step 1: Stop the server side and client side code (LmsMain.java and ClientOne.java). After you do this, there should be no JOptionPanes or JFrames showing. 
 
