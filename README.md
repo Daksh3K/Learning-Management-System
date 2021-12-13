@@ -48,6 +48,8 @@ This class is used to create Submission objects that represent a quiz submission
 
 ### Student.java
 
+The Student class represents a student user in the program. Objects of the student class contain 2 String fields for storing the student's name and email. Whenever a student object is created, the constructor also creates a text file associated with the student. This text file stores an ArrayList of Submission objects that are created whenever this Student takes a Quiz created by a Teacher. This class includes a method that retrieve the ArrayList of Submission objects that are stored in the student's text file, and another method that updates aforementioned ArrayList of Submission obects with a new ArrayList. Both of these methods are used in the Server class to access and update the ArrayList of Submission objects in Student's text file.
+
 ### Teacher.java
 
 ### Course.java
