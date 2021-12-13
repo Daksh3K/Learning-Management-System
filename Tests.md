@@ -335,7 +335,7 @@ We see that the data regarding the student’s quiz submission is stored, and ev
 
 **Important note: While your JOptionPane probably won’t look like this (since the quiz was randomized), it should look similar to this. There should be 3 questions, followed by the 3 answer choices the student selected, and the time stamp. One important thing to note is that the order in which the student saw the questions is the order in which the questions should be listed in the JOptionPane above
 
--Step 7: NO MATTER WHAT QUESTION OR ANSWER CHOICE IS WRITTEN ON YOUR JOPTIONPANE FOR THE QUESTION AND ANSWER, JUST PRESS the “YES” Button regardless. 
+-Step 7: NO MATTER WHAT QUESTION OR ANSWER CHOICE IS WRITTEN ON YOUR JOPTIONPANE FOR THE QUESTION AND ANSWER, JUST PRESS THE “YES” BUTTON REGARDLESS. 
 
 -Step 8: After you finished Step 7, you will see a JOptionPane again to decide whether you will give a point for the 2nd question. NO MATTER WHAT THE QUESTION AND ANSWER IS, JUST PRESS THE “NO” BUTTON REGARDLESS. 
 
