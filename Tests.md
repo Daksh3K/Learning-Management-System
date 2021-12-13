@@ -341,7 +341,7 @@ We see that the data regarding the student’s quiz submission is stored, and ev
 
 -Step 9: After step 8, you’ll be prompted with one more JOptionPane to decide whether  to give a point for the 3rd question. NO MATTER WHAT THE QUESTION AND ANSWER IS, JUST PRESS THE “YES” BUTTON REGARDLESS”. Once you press “Yes”, there should be no JOptionPanes, and you should observe that the JFrame automatically updates since the “Quiz1” that was on the JFrame before disappears. The quiz has been graded now, and the student can see their response. Before we do that in our next test, press the “X” button at the top right of the JFrame to go to the teacher menu, and then press the “Logout” button or the “X” at the top right of the JFrame to go back to the Start Menu.
 
-Expected Result: teacher successfully logs in after the server shuts down and sees the student’s quiz submission. The teacher grades the student’s quiz.
+Expected Result: teacher successfully logs in after the server shuts down and sees the student’s quiz submission. The teacher grades the student’s quiz. Afterward, the teacher logs out.
 
 Test Status: Passed
 
